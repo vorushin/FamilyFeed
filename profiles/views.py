@@ -8,14 +8,12 @@ from django.shortcuts import render
 
 from profiles.forms import ChildForm, RegistrationForm
 from sources import youtube, facebook
-<<<<<<< HEAD
 from utils import make_uri_title
 from utils.fb import facebook_callback
-=======
->>>>>>> c6353927bb6eff7983fe939c81f1c1a43a3c9b69
 
 from utils.json import ObjectEncoder
 from utils.fb import facebook_callback
+
 
 class ObjectEncoder(json.JSONEncoder):
     def default(self, obj):
@@ -23,6 +21,7 @@ class ObjectEncoder(json.JSONEncoder):
             return obj.__json__()
         return dict((k, v) for k, v in obj.__dict__.items()
                            if not k.startswith("_"))
+
 
 def start(request):
     return render(request, 'profiles/start.html')
