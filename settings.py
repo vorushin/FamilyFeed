@@ -125,6 +125,7 @@ INSTALLED_APPS = (
     'coffeescript',
 
     'profiles',
+    'timeline',
 )
 
 SKIP_SOUTH_TESTS = True
