@@ -10,7 +10,8 @@ def atom_datetime(atom_date):
 class YoutubeVideo(object):
     
     def __init__(self, entry):
-        self.entry = entry
+        self.title = entry.title.text
+        self.thumbnails = entry.media.thumbnail
 
     # def __getattr__(self, attr):
     #     value = getattr(self.entry, attr) 
@@ -18,13 +19,8 @@ class YoutubeVideo(object):
     #         return datetime.datetime.strptime(value.text, '%Y-%m-%dT%H:%M:%S.%fZ')
     #     return value.text
 
-    @property
-    def title(self):
-        return self.entry.title.text
-
-    @property
-    def thumbnails(self):
-        return entry.media.thumbnails
+    def json(self):
+        return self.__dict__
 
     def __repr__(self):
         return "YoutubeVideo: '%s'" % self.title
