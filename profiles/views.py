@@ -5,17 +5,17 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render
 
-import json
-
 from profiles.forms import RegistrationForm
 from sources import youtube, facebook
 from utils.fb import facebook_callback
+
 
 class ObjectEncoder(json.JSONEncoder):
     def default(self, obj):
         if hasattr(obj, '__json__'):
             return obj.__json__()
-        return dict((k, v) for k, v in obj.__dict__.items() if not k.startswith("_"))
+        return dict((k, v) for k, v in obj.__dict__.items()
+                           if not k.startswith("_"))
 
 
 def start(request):
@@ -42,7 +42,9 @@ def add_child(request):
 
 def youtube_feed(request):
     username = request.GET['username']
-    return HttpResponse(json.dumps(youtube.list_videos(username), cls=ObjectEncoder))
+    return HttpResponse(json.dumps(youtube.list_videos(username),
+                                   cls=ObjectEncoder))
+
 
 def facebook_feed(request):
     token = 'TODO'
