@@ -1,0 +1,69 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+    <script src="http://static.simile.mit.edu/timeline/api-2.3.0/timeline-api.js?bundle=true" type="text/javascript"></script>
+
+    {% autoescape off %}
+    <script>
+        $(document).ready(function() {
+            var eventSource = new Timeline.DefaultEventSource();
+            var bandInfos = [
+                Timeline.createBandInfo({
+                    eventSource:    eventSource,
+                    width:          "90%",
+                    intervalUnit:   Timeline.DateTime.MONTH,
+                    intervalPixels: 100,
+                    eventPainter:   Timeline.CompactEventPainter,
+                    eventPainterParams: {
+                        iconLabelGap:     5,
+                        labelRightMargin: 20,
+                        
+                        iconWidth:        120, // These are for per-event custom icons
+                        iconHeight:       90,
+                        
+                        stackConcurrentPreciseInstantEvents: {
+                            limit: 5,
+                            moreMessageTemplate:    "%0 More Events",
+                            icon:                   "no-image-80.png", // default icon in stacks
+                            iconWidth:              120,
+                            iconHeight:             90
+                        }
+                    }
+                }),
+                Timeline.createBandInfo({
+                    width:          "10%",
+                    intervalUnit:   Timeline.DateTime.YEAR,
+                    intervalPixels: 200
+                })
+            ];
+            bandInfos[1].syncWith = 0;
+            bandInfos[1].highlight = true;
+            tl = Timeline.create(document.getElementById("my-timeline"), bandInfos);
+
+            var resizeTimerID = null;
+            $(window).resize(function() {
+                 if (resizeTimerID == null) {
+                     resizeTimerID = window.setTimeout(function() {
+                         resizeTimerID = null;
+                         tl.layout();
+                     }, 500);
+                 }
+            });
+
+            var events = {{ events }};
+            
+            var json = {
+              'dateTimeFormat': 'Gregorian',
+              'events': events
+            };
+            eventSource.loadJSON(json, document.location.href);
+        })
+    </script>
+    {% endautoescape %}
+</head>
+<body>
+    <div id="my-timeline" style="height: 500px; border: 1px solid #aaa"></div>
+</body>
+</html>

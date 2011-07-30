@@ -11,6 +11,7 @@ class YoutubeVideo(object):
     
     def __init__(self, entry):
         self.title = entry.title.text
+        self.published = atom_datetime(entry.published)
         self.thumbnails = entry.media.thumbnail
 
     # def __getattr__(self, attr):
