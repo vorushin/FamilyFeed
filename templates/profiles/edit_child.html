@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% block extrahead %}
+    <script src="{{ STATIC_URL }}{% coffeescript "js/edit_child.coffee" %}"></script>
 {% endblock extrahead %}
 
 {% block content %}

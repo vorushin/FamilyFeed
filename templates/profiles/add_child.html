@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block extrahead %}
+  <script src="{{ STATIC_URL }}js/add_child.js"></script>
+{% endblock extrahead %}
+
+{% block content %}
+  <div class="register step2 cf">
+    <p class="form_message"><strong>Welcome on board, %username!</strong></p>
+    <h1>Add some info about your child</h1>
+    <p>Some instructions goes here. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum et vestibulum augue.</p>
+    <form method="POST" action="." сlass="cf">
+      {% csrf_token %}
+      <label for="babyname">Name of your child</label>
+      <input type="text" name="name" value="{{ form.data.name }}" class="text" id="babyname" tabindex="1" required>
+      {% for error in form.errors.name %}<span class="val_message">{{ error }}</span>{% endfor %}
+
+      <div class="cf">
+        <label>His/her birthdate</label>
+        <label class="label_min label_year">
+          <input type="number" name="year" class="number year" id="dateofbirth_year" placeholder="Year"  min="1995" max="2011" step="1" required>
+          Year</label>
+        <label class="label_min label_year">
+          <input type="number" name="month" class="number month" id="dateofbirth_month" placeholder="Month"  min="01" max="12" step="1" required>
+          Month</label>
+        <label class="label_min label_year">
+          <input type="number" name="day" class="number day" id="dateofbirth_day"  placeholder="Day"  min="01" max="31" step="1" required>
+          Day</label>
+        {% for error in form.errors.birthdate %}<span class="val_message">{{ error }}</span>{% endfor %}
+      </div>
+      <a href="#" role="button" class="btn"><strong>Save</strong></a> <a href="#" class="btn_cancel">Cancel</a>
+    </form>
+  </div>
+{% endblock content %}

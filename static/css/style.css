@@ -1,21 +1,140 @@
 /* Header*/
 
-header  {width:100%; background:#333;}
-header .inner, #main {width: 940px; margin:0 auto; }
-header .inner {height:30px;}
-header .logo {color:#fff; font: bold 20px/30px sans-serif;}
+header {
+    width:100%;
+    background:#333;
+}
+header .inner,
+#main {
+    width: 940px;
+    margin:0 auto;
+}
+header .inner { height:30px; }
+header .logo {
+    color:#fff;
+    font: bold 20px/30px sans-serif;
+}
+h1 {
+    font: bold 44px/50px sans-serif;
+    margin:40px 0 10px;
+}
+h2 {
+    font: bold 36px/40px sans-serif;
+    margin:40px 0 10px;
+}
+h3 {
+    font: bold 22px/30px sans-serif;
+    margin:20px 0 10px;
+}
+p {
+    font: normal 16px/20px sans-serif;
+    margin: 0 0 20px;
+}
+label {
+    display:block;
+    font: bold 22px/30px sans-serif;
+    margin: 20px 0 0;
+}
+input.text, input.number {
+    height:44px;
+    font: bold 30px/44px sans-serif;
+    background: #F9EFCA;
+    border:solid 1px #999;
+    color:#c66;
+}
+
+label.label_min {float:left;margin-right:20px; font: normal italic 15px/20px serif;}
+input.number{width:100px;  }
+input.text {width:400px;}
+input.year {width:150px;}
 
 
-h1 {font: bold 44px/50px sans-serif; margin:40px 0 10px;}
-p {font: normal 16px/20px sans-serif; margin: 0 0 20px;}
 
-label {display:block; font: bold 22px/30px sans-serif; margin: 20px 0 0;}
-input.text {width:400px; height:44px; font: bold 30px/44px sans-serif; background: #F9EFCA; border:solid 1px #999; color:#c66;}
-span.suggest {font: italic 13px/16px serif; display:inline-block; margin-right:50px;}
-a[role="button"] {height: 44px; width: 400px; margin: 20px 0 0; text-align:center; font: bold 22px/44px sans-serif; color:#c66;}
+span.suggest {
+    font: italic 15px/16px serif;
+    display:inline-block;
+    margin: 7px 50px 7px 0;
+}
+p.suggest {
+    font: italic 15px/16px serif;
+    margin: 7px 0 20px;
+}
+a.btn {
+    height: 44px;
+    display:inline-block;
+    margin: 20px 0 0;
+    padding: 0 20px;
+    text-align:center;
+    font: bold 22px/44px sans-serif;
+    color:#fff;
+    background:#c66;
+    border-radius: 44px;
+    text-decoration:none;
+}
+a.btn_cancel {display: inline-block; height:14px; margin: 15px 0 15px 20px; font: normal 13px/14px sans-serif; color: #666; border-bottom: dotted 1px #666;  text-decoration:none;}
+a.btn_cancel:before { content: "× "; border-bottom:none; }
+span.val_message {
+    font: italic 13px/16px serif;
+    color:#c66;
+}
+.form_message {
+    display:block;
+    width: 400px;
+    margin: 20px 0;
+    padding:20px;
+    background: #F9EFCA;
+}
+input:focus:invalid {
+background-color:#FCD3C9;
+}
+a.icon_source {
+    display:block;
+    height:64px;
+    width:64px;
+    float: left;
+    margin: 0 20px 0 0;
+    border: 1px solid #999;
+    border-radius:5px;
+}
+.addsource .source_form,
+.addsource .source_preview { width:440px; }
+.addsource .source_form {
+    float:left;
+    margin: 0 30px 0 0;
+}
+.addsource .source_preview { margin: 0 0 0 470px; }
+.post {
+    margin:0 0 30px;
+    padding-right:30px;
+    position:relative;
+    border-bottom: dotted 1px #999;
+}
+.post .post_delete {
+    display:block;
+    position: absolute;
+    top: 0;
+    right:0;
+    width: 20px;
+    height:20px;
+    border-radius: 20px;
+    background: #c66;
+    color:#fff;
+    font: normal 14px/20px sans-serif;
+    text-decoration:none;
+    text-align:center;
+}
+.post .tweet_pic {
+    display:block;
+    width:40px;
+    height:40px;
+    float:left;
+}
+.post .tweet_text,
+.post .post_info { margin: 0 0 5px 60px; }
+.post .tweet_text { font: normal 18px/20px serif; }
+.post .post_info {
+    font: normal 13px/20px sans-serif;
+    color:#777;
+}
 
-span.val_message {font: italic 13px/16px serif; color:#c66;}
-.form_message {display:block; width: 400px; margin: 20px 0; padding:20px; background: #F9EFCA; }
-input:focus:invalid { background-color:#FCD3C9;}
-
-.initially_hidden {display: none; }
+.initially_hidden { display: none; }
