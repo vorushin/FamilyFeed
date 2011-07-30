@@ -28,4 +28,4 @@ def deploy():
         run_in_virtualenv('./manage.py syncdb')
         run_in_virtualenv('./manage.py migrate --noinput')
         run('initctl reload-configuration')
-        run('restart FamilyFeed')
+        run('restart familyfeed')
