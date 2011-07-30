@@ -98,6 +98,8 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    
+    'facebook.djangofb.FacebookMiddleware',
 )
 
 ROOT_URLCONF = 'FamilyFeed.urls'
@@ -143,3 +145,31 @@ LOGGING = {
         },
     }
 }
+
+try:
+    from local_settings import *
+except ImportError:
+    import sys
+    sys.stderr.write('Unable to read local_settings.py\n')
+    # Convenient defaults
+    DEBUG = False
+
+try:
+    DATABASES.update(LOCAL_DATABASES)
+except NameError:
+    pass
+
+try:
+    INSTALLED_APPS += ADDITIONAL_APPS
+except NameError:
+    pass
+
+try:
+    MIDDLEWARE_CLASSES += ADDITIONAL_MIDDLEWARE
+except NameError:
+    pass
+
+if not hasattr(globals(), 'TEMPLATE_DEBUG'):
+    TEMPLATE_DEBUG = DEBUG
+if not hasattr(globals(), 'THUMBNAIL_DEBUG'):
+    THUMBNAIL_DEBUG = DEBUG
