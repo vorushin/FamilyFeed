@@ -35,7 +35,7 @@ def registration(request):
 
 
 def add_child(request):
-    return HttpResponse('add child')
+    return render(request, 'profiles/edit_child.html', {'is_creation': True})
 
 
 def youtube_feed(request):
