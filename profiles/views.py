@@ -8,7 +8,7 @@ from django.shortcuts import render
 import json
 
 from profiles.forms import RegistrationForm
-from sources import youtube
+from sources import youtube, facebook
 from utils.fb import facebook_callback
 
 class ObjectEncoder(json.JSONEncoder):
@@ -44,12 +44,12 @@ def youtube_feed(request):
     username = request.GET['username']
     return HttpResponse(json.dumps(youtube.list_videos(username), cls=ObjectEncoder))
 
+def facebook_feed(request):
+    token = 'TODO'
+    username = request.GET['username']
+    return HttpResponse(json.dumps(facebook.list_posts(username, token)))
+
 
 @facebook_callback
 def facebook_login_done(request, access_token):
     return HttpResponse(access_token)
-
-
-# def facebook_login_done(request):
-#     code = request.GET['code']
-#     return HttpResponse(code)
