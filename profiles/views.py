@@ -7,3 +7,7 @@ def start(request):
 
 def registration(request):
     return render(request, 'profiles/registration.html')
+
+
+def youtube_feed(request):
+    return ""
