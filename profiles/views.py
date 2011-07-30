@@ -4,6 +4,8 @@ from django.http import HttpResponseRedirect, HttpResponse
 
 import json
 
+from utils.fb import facebook_callback
+
 from sources import youtube
 
 class ObjectEncoder(json.JSONEncoder):
@@ -23,3 +25,13 @@ def registration(request):
 def youtube_feed(request):
     username = request.GET['username']
     return HttpResponse(json.dumps(youtube.list_videos(username), cls=ObjectEncoder))
+
+
+@facebook_callback
+def facebook_login_done(request, access_token):
+    return HttpResponse(access_token)
+
+
+# def facebook_login_done(request):
+#     code = request.GET['code']
+#     return HttpResponse(code)
