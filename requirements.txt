@@ -8,3 +8,7 @@ South==0.7.3
 django-extensions>=0.5
 
 -e git+git://github.com/vorushin/django-coffeescript.git#egg=django-coffeescript
+
+gdata==2.0.14
+
+git+git://github.com/facebook/python-sdk.git#facebook_python_sdk
