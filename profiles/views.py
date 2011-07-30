@@ -9,13 +9,10 @@ import json
 
 from profiles.forms import RegistrationForm
 from sources import youtube, facebook
-from utils.fb import facebook_callback
 
-class ObjectEncoder(json.JSONEncoder):
-    def default(self, obj):
-        if hasattr(obj, '__json__'):
-            return obj.__json__()
-        return dict((k, v) for k, v in obj.__dict__.items() if not k.startswith("_"))
+from utils.json import ObjectEncoder
+
+from utils.fb import facebook_callback
 
 
 def start(request):

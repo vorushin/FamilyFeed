@@ -5,6 +5,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
     <script src="http://static.simile.mit.edu/timeline/api-2.3.0/timeline-api.js?bundle=true" type="text/javascript"></script>
 
+    {% autoescape off %}
     <script>
         $(document).ready(function() {
             var eventSource = new Timeline.DefaultEventSource();
@@ -35,24 +36,16 @@
                  }
             });
 
+            var events = {{ events }};
+            
             var json = {
               'dateTimeFormat': 'Gregorian',
-              'events': [
-                {
-                   'start':"May 20 2010 00:00:00 GMT-0600",
-                   'title':"'Bay of Pigs' Invasion",
-                   'durationEvent':false
-                }, {
-                   'start':"May 01 2011 00:00:00 GMT-0600" ,
-                   'end':"Jun 01 2011 00:00:00 GMT-0600" ,
-                   'durationEvent':true,
-                   'title':"Oswald moves to New Orleans",
-                   'description':"Oswald moves to New Orleans, and finds employment at the William B. Riley Coffee Company. <i>ref. Treachery in Dallas, p 320</i>"
-                }]
+              'events': events
             };
             eventSource.loadJSON(json, document.location.href);
         })
     </script>
+    {% endautoescape %}
 </head>
 <body>
     <div id="my-timeline" style="height: 500px; border: 1px solid #aaa"></div>

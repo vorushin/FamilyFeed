@@ -1,3 +1,5 @@
+from __future__ import absolute_import
+
 from django.contrib.sites.models import Site
 
 def log_exception(text, **kwargs):
@@ -9,3 +11,4 @@ def absolute_uri(location, request=None):
         'https' if request and request.is_secure() else 'http',
         Site.objects.get_current().domain,
         location)
+
