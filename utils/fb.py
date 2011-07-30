@@ -75,7 +75,7 @@ def get_facebook_access_token(request):
     params = {
         'client_id': settings.FACEBOOK_API_KEY,
         'client_secret': settings.FACEBOOK_SECRET_KEY,
-        'redirect_uri': settings.FACEBOOK_REDIRECT_URL,,
+        'redirect_uri': settings.FACEBOOK_REDIRECT_URL,
         # 'redirect_uri': absolute_uri(request.path, request),
         'code': code,
     }

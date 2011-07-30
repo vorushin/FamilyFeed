@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block extrahead %}
+    <script src="{{ STATIC_URL }}js/registration.js"></script>
+{% endblock extrahead %}
+
+{% block content %}
+  <div class="register step1">
+    <h1>Make your own family feed</h1>
+    <p>
+      FamilyFeed creates timelines with photos &amp; videos for your kids.
+      Data for these timelines can go from Facebook, Twitter and Youtube
+      accounts of your family members.
+    </p>
+    <form method="POST" action=".">
+      {% csrf_token %}
+      <label for="login">Choose login name</label>
+      <input name="username" type="text" value="{{ form.data.username }}" class="text" id="login" tabindex="1" required>
+      {% for error in form.errors.username %}<span class="val_message">{{ error }}</span>{% endfor %}
+
+      <label for="pass">Set password</label>
+      <input name="open_password" type="text" class="text initially_hidden" id="pass" tabindex="2" required>
+      <input name="password" type="password" value="{{ form.data.password }}" class="text" id="pass" tabindex="2" required>
+      {% for error in form.errors.password %}<span class="val_message">{{ error }}</span>{% endfor %}
+      <input name="showpass" type="checkbox" value="">Show password</input>
+
+      <a href="#" role="button" class="btn"><strong>Save &amp; Continue</strong></a>
+    </form>
+  </div>
+{% endblock content %}
