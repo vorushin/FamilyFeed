@@ -1,4 +1,7 @@
 # Django settings for FamilyFeed project.
+import os.path
+
+PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -56,11 +59,13 @@ MEDIA_URL = ''
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/home/media/media.lawrence.com/static/"
-STATIC_ROOT = ''
+STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
 
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
 STATIC_URL = '/static/'
+
+COFFEESCRIPT_OUTPUT_DIR = 'coffee'
 
 # URL prefix for admin static files -- CSS, JavaScript and images.
 # Make sure to use a trailing slash.
@@ -105,9 +110,7 @@ MIDDLEWARE_CLASSES = (
 ROOT_URLCONF = 'FamilyFeed.urls'
 
 TEMPLATE_DIRS = (
-    # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
-    # Always use forward slashes, even on Windows.
-    # Don't forget to use absolute paths, not relative paths.
+    os.path.join(PROJECT_ROOT, 'templates'),
 )
 
 INSTALLED_APPS = (
@@ -119,8 +122,15 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'django_extensions',
+    'south',
+    'coffeescript',
+
     'profiles',
 )
+
+SKIP_SOUTH_TESTS = True
+SOUTH_TESTS_MIGRATE = False
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
