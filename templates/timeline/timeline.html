@@ -14,7 +14,23 @@
                     eventSource:    eventSource,
                     width:          "90%",
                     intervalUnit:   Timeline.DateTime.MONTH,
-                    intervalPixels: 100
+                    intervalPixels: 100,
+                    eventPainter:   Timeline.CompactEventPainter,
+                    eventPainterParams: {
+                        iconLabelGap:     5,
+                        labelRightMargin: 20,
+                        
+                        iconWidth:        120, // These are for per-event custom icons
+                        iconHeight:       90,
+                        
+                        stackConcurrentPreciseInstantEvents: {
+                            limit: 5,
+                            moreMessageTemplate:    "%0 More Events",
+                            icon:                   "no-image-80.png", // default icon in stacks
+                            iconWidth:              120,
+                            iconHeight:             90
+                        }
+                    }
                 }),
                 Timeline.createBandInfo({
                     width:          "10%",

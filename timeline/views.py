@@ -9,12 +9,8 @@ class YouTubeEvent(object):
     
     def __init__(self, video):
         self.start = video.published.isoformat()
-        # self.end = self.start
         self.title = video.title
         self.icon = video.thumbnails[1].url
-        # self.image = video.thumbnails[1].url
-        self.durationEvent = False
-        # self.durationEvent = True
 
 
 def timeline(request):
