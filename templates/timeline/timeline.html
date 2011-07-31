@@ -23,10 +23,15 @@
 <div class="children_panel">
   {% for child in children %}
 <div class="child {% if child.slug == current_child_slug %}active{% else %}shadow_big{% endif %} grey_grad">
-  <a href="{% url timeline.views.timeline username=username child_slug=child.slug %}" class="child_on">{{child.name}} <span>{{child.age}} old</span></a><a href="{% url profiles.views.edit_child username=username child_slug=child.slug %}" class="edit">Edit {{child.name}}'s profile</a>
+  <a href="{% url timeline.views.timeline username=username child_slug=child.slug %}" class="child_on">{{child.name}} <span>{{child.age}} old</span></a>
+  {% if user == child.user %}
+  <a href="{% url profiles.views.edit_child username=username child_slug=child.slug %}" class="edit">Edit {{child.name}}'s profile</a>
+  {% endif %}
 </div>
   {% endfor %}
+  {% if user == children.0.user %}
 <a href="{% url profiles.views.add_child %}" class="add green_grad shadow_big" title="Add child profile">+</a> 
+  {% endif %}
 
 </div>
 

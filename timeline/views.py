@@ -13,7 +13,6 @@ from django.shortcuts import get_object_or_404, render
 
 from profiles.models import Child
 from sources import youtube, facebook
-from timeline.utils import age
 from utils import comma_split, make_uri_title
 from utils.json import ObjectEncoder
 
@@ -106,7 +105,7 @@ def timeline(request, username, child_slug):
         events_key = '%s_%s' % (facebook_source.uid, make_uri_title(facebook_source.keywords))
         events = cache.get(events_key)
         if not events:
-            events = keywords_present(facebook.list_posts(facebook_source.access_token, first_5=False), comma_split(facebook_source.keywords), facebook.post_text)
+            events = keywords_present(facebook.list_posts(facebook_source.access_token, first_5=True), comma_split(facebook_source.keywords), facebook.post_text)
             cache.set(events_key, events, 24 * 3600)
         facebook_events.extend(events)
 
@@ -122,9 +121,6 @@ def timeline(request, username, child_slug):
     events.extend([YouTubeEvent(video) for video in youtube_events])
 
     events_json = json.dumps(events, cls=ObjectEncoder)
-    children_data = [dict(name=child.name, slug=child.slug, age=age(child.birthdate)) for child in children]
     return render(request, "timeline/timeline.html",
-                  { 'events' : events_json, 'children' : children_data, 'username' : username, 'current_child_slug' : child_slug})
+                  { 'events' : events_json, 'children' : children, 'username' : username, 'current_child_slug' : child_slug})
 
-# def events(request):
-#     return HttpResponse(json.dumps(youtube.list_videos(username), cls=ObjectEncoder))

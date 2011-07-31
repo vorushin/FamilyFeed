@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 from django.db import models
 
-from utils import comma_split, make_uri_title
+from utils import comma_split, make_uri_title, make_age
 
 
 def youtube_picture(username):
@@ -44,6 +44,10 @@ class Child(models.Model):
     @property
     def twitter_source(self):
         return TwitterSource.objects.get_or_create(child=self)[0]
+
+    @property
+    def age(self):
+        return make_age(self.birthdate)
 
 
 class TwitterSource(models.Model):
