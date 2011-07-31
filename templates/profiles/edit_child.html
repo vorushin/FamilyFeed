@@ -12,6 +12,11 @@
                 $('div.add_facebook').show()
                 return false
 
+            $('div.source_youtube a.view').click ->
+                $('div.add_facebook').hide()
+                $('div.add_twitter').hide()
+                $('div.add_youtube').show()
+
             $('div.source_facebook a.add').click ->
                 window.open(
                     '{% url profiles.views.add_facebook_profile child.user.username child.slug %}',
@@ -52,7 +57,7 @@
   <div class="addsource_btns cf">
     <div class="source source_facebook shadow_big">
         <a href="#" class="view"></a>
-        {% for source in child.facebook_sources %}
+        {% for source in child.facebook_sources.all %}
             <div class="added_source cf">
                 <a href="#" class="view">
                     <img src="{{ source.picture }}" alt="{{ source.name }}" title="{{ source.name }}"  class="pic" />
@@ -74,6 +79,15 @@
     </div>
 
     <div class="source source_youtube shadow_big">
+        <a href="#" class="view"></a>
+        {% for source in child.youtube_sources %}
+            <div class="added_source cf">
+                <a href="#" class="view">
+                    <img src="{{ source.picture }}" alt="{{ source.name }}" title="{{ source.name }}"  class="pic" />
+                </a>
+                <a href="#" title="Delete source" class="delete shadow_small red_grad">×</a>
+            </div>
+        {% endfor %}
         {% comment %}
         <div class="added_source cf">
         <img src="http://a1.twimg.com/profile_images/1468944732/contactango_normal.jpeg" alt="Roman Vorushin"  class="pic" />
@@ -91,7 +105,7 @@
 
         <label>Facebook profiles:</label>
         <ul>
-            {% for source in child.facebook_sources %}<li>{{ source.name }}</li>{% endfor %}
+            {% for source in child.facebook_sources.all %}<li>{{ source.name }}</li>{% endfor %}
         </ul>
 
         <label for="facebook_searchfor">Search for:</label>
@@ -128,6 +142,28 @@
   </div>
 
   <div class="addsource add_youtube cf" style="display: none;">
+    <div class="source_form">
+      <form method="POST" action="{% url profiles.views.save_youtube_source child.user.username child.slug %}" сlass="cf">
+        {% csrf_token %}
+
+        <label for="twitter_accounts">Youtube usernames</label>
+        <span class="suggest">Add a few youtube usernames separated by commas</span>
+        <input type="text" name="usernames" class="text" id="youtube_usernames" placeholder="" >
+
+        <label for="facebook_searchfor">Search for:</label>
+        <span class="suggest">You can add a few words separated by commas</span>
+        <input type="text" name="keywords" class="text" id="youtube_searchfor" value="{{ child.youtube_keywords }}">
+      </form>
+      <a href="#" role="button" class="btn save shadow_big red_grad"><strong>Save</strong></a>
+      <a href="#" class="btn green_grad shadow_big preview" role="button"><strong>Preview</strong></a>
+      <a href="#" class="btn_cancel">Cancel</a>
+    </div>
+
+    <div class="loading">
+        Loading
+    </div>
+    <div class="source_preview">
+    </div>
   </div>
   </div>
 {% endblock content %}

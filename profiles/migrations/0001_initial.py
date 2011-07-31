@@ -13,37 +13,37 @@ class Migration(SchemaMigration):
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('user', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['auth.User'])),
             ('name', self.gf('django.db.models.fields.CharField')(max_length=50)),
+            ('slug', self.gf('django.db.models.fields.SlugField')(max_length=50, db_index=True)),
             ('birthdate', self.gf('django.db.models.fields.DateField')()),
         ))
         db.send_create_signal('profiles', ['Child'])
 
-        # Adding model 'DataSource'
-        db.create_table('profiles_datasource', (
-            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('child', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['profiles.Child'])),
-            ('keywords', self.gf('django.db.models.fields.TextField')()),
-        ))
-        db.send_create_signal('profiles', ['DataSource'])
-
         # Adding model 'TwitterSource'
         db.create_table('profiles_twittersource', (
-            ('datasource_ptr', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['profiles.DataSource'], unique=True, primary_key=True)),
-            ('username', self.gf('django.db.models.fields.CharField')(max_length=15)),
+            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+            ('child', self.gf('django.db.models.fields.related.OneToOneField')(related_name='+', unique=True, to=orm['profiles.Child'])),
+            ('usernames', self.gf('django.db.models.fields.TextField')(null=True, blank=True)),
+            ('keywords', self.gf('django.db.models.fields.TextField')(null=True, blank=True)),
         ))
         db.send_create_signal('profiles', ['TwitterSource'])
 
         # Adding model 'YoutubeSource'
         db.create_table('profiles_youtubesource', (
-            ('datasource_ptr', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['profiles.DataSource'], unique=True, primary_key=True)),
-            ('username', self.gf('django.db.models.fields.CharField')(max_length=100)),
+            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+            ('child', self.gf('django.db.models.fields.related.OneToOneField')(related_name='+', unique=True, to=orm['profiles.Child'])),
+            ('usernames', self.gf('django.db.models.fields.TextField')(null=True, blank=True)),
+            ('keywords', self.gf('django.db.models.fields.TextField')(null=True, blank=True)),
         ))
         db.send_create_signal('profiles', ['YoutubeSource'])
 
         # Adding model 'FacebookSource'
         db.create_table('profiles_facebooksource', (
-            ('datasource_ptr', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['profiles.DataSource'], unique=True, primary_key=True)),
+            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+            ('child', self.gf('django.db.models.fields.related.ForeignKey')(related_name='facebook_sources', to=orm['profiles.Child'])),
             ('uid', self.gf('django.db.models.fields.CharField')(max_length=100)),
+            ('name', self.gf('django.db.models.fields.CharField')(max_length=100)),
             ('access_token', self.gf('django.db.models.fields.CharField')(max_length=100)),
+            ('keywords', self.gf('django.db.models.fields.TextField')()),
         ))
         db.send_create_signal('profiles', ['FacebookSource'])
 
@@ -52,9 +52,6 @@ class Migration(SchemaMigration):
         
         # Deleting model 'Child'
         db.delete_table('profiles_child')
-
-        # Deleting model 'DataSource'
-        db.delete_table('profiles_datasource')
 
         # Deleting model 'TwitterSource'
         db.delete_table('profiles_twittersource')
@@ -108,29 +105,31 @@ class Migration(SchemaMigration):
             'birthdate': ('django.db.models.fields.DateField', [], {}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '50'}),
+            'slug': ('django.db.models.fields.SlugField', [], {'max_length': '50', 'db_index': 'True'}),
             'user': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['auth.User']"})
         },
-        'profiles.datasource': {
-            'Meta': {'object_name': 'DataSource'},
-            'child': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['profiles.Child']"}),
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'keywords': ('django.db.models.fields.TextField', [], {})
-        },
         'profiles.facebooksource': {
-            'Meta': {'object_name': 'FacebookSource', '_ormbases': ['profiles.DataSource']},
+            'Meta': {'object_name': 'FacebookSource'},
             'access_token': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
-            'datasource_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': "orm['profiles.DataSource']", 'unique': 'True', 'primary_key': 'True'}),
+            'child': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'facebook_sources'", 'to': "orm['profiles.Child']"}),
+            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'keywords': ('django.db.models.fields.TextField', [], {}),
+            'name': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
             'uid': ('django.db.models.fields.CharField', [], {'max_length': '100'})
         },
         'profiles.twittersource': {
-            'Meta': {'object_name': 'TwitterSource', '_ormbases': ['profiles.DataSource']},
-            'datasource_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': "orm['profiles.DataSource']", 'unique': 'True', 'primary_key': 'True'}),
-            'username': ('django.db.models.fields.CharField', [], {'max_length': '15'})
+            'Meta': {'object_name': 'TwitterSource'},
+            'child': ('django.db.models.fields.related.OneToOneField', [], {'related_name': "'+'", 'unique': 'True', 'to': "orm['profiles.Child']"}),
+            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'keywords': ('django.db.models.fields.TextField', [], {'null': 'True', 'blank': 'True'}),
+            'usernames': ('django.db.models.fields.TextField', [], {'null': 'True', 'blank': 'True'})
         },
         'profiles.youtubesource': {
-            'Meta': {'object_name': 'YoutubeSource', '_ormbases': ['profiles.DataSource']},
-            'datasource_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': "orm['profiles.DataSource']", 'unique': 'True', 'primary_key': 'True'}),
-            'username': ('django.db.models.fields.CharField', [], {'max_length': '100'})
+            'Meta': {'object_name': 'YoutubeSource'},
+            'child': ('django.db.models.fields.related.OneToOneField', [], {'related_name': "'+'", 'unique': 'True', 'to': "orm['profiles.Child']"}),
+            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'keywords': ('django.db.models.fields.TextField', [], {'null': 'True', 'blank': 'True'}),
+            'usernames': ('django.db.models.fields.TextField', [], {'null': 'True', 'blank': 'True'})
         }
     }
 
