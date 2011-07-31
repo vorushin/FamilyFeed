@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block extrahead %}
+<script>
+$(document).ready(function() {
+    $("form a.btn").click(function () {
+        $("form").submit();
+    });
+});
+</script>
+{% endblock extrahead %}
+
+{% block content %}
+  <div class="login">
+    <h1>Log in</h1>
+    <form method="POST" action=".">
+      {% csrf_token %}
+      {{ form.as_p }}
+
+      <a href="#" role="button" class="btn"><strong>Log in</strong></a>
+    </form>
+  </div>
+{% endblock content %}

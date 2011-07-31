@@ -17,7 +17,10 @@ from utils.fb import facebook_callback
 
 
 def start(request):
-    return render(request, 'profiles/start.html')
+    if request.user.is_authenticated():
+        return HttpResponseRedirect(reverse('timeline.views.timeline'))
+    else:
+        return render(request, 'profiles/start.html')
 
 
 def registration(request):
