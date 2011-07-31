@@ -10,7 +10,7 @@ def atom_datetime(atom_date):
 class YoutubeVideo(object):
     
     def __init__(self, entry):
-        self.title = entry.title.text
+        self.title = entry.title.text.decode('utf-8')
         self.published = atom_datetime(entry.published)
         self.thumbnails = entry.media.thumbnail
         self.url = entry.media.content[0].url

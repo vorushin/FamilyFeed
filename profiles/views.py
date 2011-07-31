@@ -138,7 +138,7 @@ def get_youtube_data_ajax(request, username, child_slug):
         youtube_events += youtube.list_videos(username)
     youtube_events = keywords_present(youtube_events,
                                       [],
-                                      lambda video: video.title.decode('utf-8'))
+                                      lambda video: video.title)
     youtube_events = [YouTubeEvent(video) for video in youtube_events]
     return render(request,
                   'profiles/youtube_data.html',

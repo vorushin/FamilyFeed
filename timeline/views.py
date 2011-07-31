@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from __future__ import absolute_import
 
 import json
@@ -71,7 +73,7 @@ def logged_in(request, username):
 def list_keywords(keywords_text):
     keywords_text = keywords_text.strip()
     if keywords_text:
-        return keywords_text.split()
+        return [keyword.strip() for keyword in keywords_text.split(",")]
     else:
         return []
 
@@ -79,28 +81,27 @@ def keywords_present(items, keywords, text_func):
     result = []
     if not keywords:
         return items
+    result = []
     for item in items:
         text = text_func(item)
         for keyword in keywords:
             if text.find(keyword) != -1:
-                items.append(item)
+                result.append(item)
                 break
-    return items
+    return result
 
 def timeline(request, username, child_slug):
     child = Child.objects.get(user__username__exact=username, slug__exact=child_slug)
     children = Child.objects.filter(user__username__exact=username)
     facebook_events = []
     for facebook_source in child.facebook_sources.all():
-        # TODO keywords
-        # print "****** ", list_keywords(facebook_source.keywords)
+        # facebook_events.extend(keywords_present(facebook.list_posts(facebook_source.access_token, first_5=True), [u'Март'], facebook.post_text))
         facebook_events.extend(keywords_present(facebook.list_posts(facebook_source.access_token, first_5=True), list_keywords(facebook_source.keywords), facebook.post_text))
 
     youtube_events = keywords_present(youtube.list_videos('vorushin'), [], lambda video: video.title)
 
     events = []
     events.extend([FacebookEvent(post) for post in facebook_events])
-    # TODO keywords
     events.extend([YouTubeEvent(video) for video in youtube_events])
     events_json = json.dumps(events, cls=ObjectEncoder)
     children_data = [dict(name=child.name, slug=child.slug, age=age(child.birthdate)) for child in children]
