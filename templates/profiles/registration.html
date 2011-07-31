@@ -22,7 +22,7 @@
       <input name="open_password" type="text" class="text" style="display: none;" id="pass" tabindex="2" required>
       <input name="password" type="password" value="{{ form.data.password }}" class="text" id="pass" tabindex="2" required>
       {% for error in form.errors.password %}<span class="val_message">{{ error }}</span>{% endfor %}
-      <input name="showpass" type="checkbox" value="">Show password</input>
+      <p><input name="showpass" type="checkbox" value="">Show password</input></p>
 
       <a href="#" class="btn red_grad shadow_big" role="button"><strong>Save &amp; Continue</strong></a>
     </form>
