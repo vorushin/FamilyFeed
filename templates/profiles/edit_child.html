@@ -26,6 +26,10 @@
                       {'keywords': $('#facebook_searchfor').val()},
                       (data) -> $('div.add_facebook div.source_preview').html(data))
                 return false
+
+            $('div.add_facebook a.btn').click ->
+                $('div.add_facebook form').submit()
+                return false
     {% endinlinecoffeescript %}
     </script>
 {% endblock extrahead %}
@@ -77,7 +81,9 @@
 
   <div class="addsource add_facebook cf" style="display: none;">
     <div class="source_form">
-      <form action="#" сlass="cf">
+      <form method="POST" action="{% url profiles.views.save_facebook_source child.user.username child.slug %}" сlass="cf">
+        {% csrf_token %}
+
         <label>Facebook profiles:</label>
         <ul>
             {% for source in child.facebook_sources %}<li>{{ source.name }}</li>{% endfor %}
@@ -85,10 +91,12 @@
 
         <label for="facebook_searchfor">Search for:</label>
         <span class="suggest">You can add a few words separated by commas</span>
-        <input type="text" class="text" id="facebook_searchfor" value="{{ child.name }}, ">
-        <a href="#" role="button" class="preview"><strong>Preview&nbsp;&rarr;</strong></a>
+        <input type="text" name="keywords" class="text" id="facebook_searchfor" value="{{ child.name }}, ">
       </form>
-      <a href="#" role="button" class="btn shadow_big red_grad"><strong>Save these sources</strong></a> <a href="#" class="btn_cancel">Cancel</a>
+      <a href="#" role="button" class="btn shadow_big red_grad"><strong>Save</strong></a>
+      <a href="#" class="btn green_grad shadow_big preview" role="button"><strong>Preview</strong></a>
+      <a href="#" class="btn_cancel">Cancel</a>
+
     </div>
 
     <div class="source_preview">
