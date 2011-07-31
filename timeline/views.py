@@ -29,7 +29,7 @@ def start(request):
         return HttpResponseRedirect(reverse('timeline.views.logged_in'))
     else:
         events = json.dumps([YouTubeEvent(video) for video in youtube.list_videos('vorushin')], cls=ObjectEncoder)
-        return render(request, 'timeline/start.html', { 'events' : events });
+        return render(request, 'timeline/start.html', { 'events' : events, 'body_class' : 'home' });
 
 def logged_in(request, username):
     children = Child.objects.filter(user__username__exact=username)

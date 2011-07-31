@@ -21,7 +21,7 @@
 {% block extrahead %}{% endblock %}
 
 </head>
-<body>
+<body{% if body_class %} class="{{body_class}}"{% endif %}>
 <div id="container">
   <header>
     <div class="inner">
