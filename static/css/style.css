@@ -249,7 +249,10 @@ position:absolute; top:15px; right:-16px; color:#fff; font: bold 26px/32px Helve
 
 /* Godspeed You, Timeline */
 
-.timeline-container {position: absolute; width:100%; top:60px;}
+.timeline-container {
+position: absolute !important;
+top: 160px;
+width: 100%;}
 
 .timeline-event-label {display:none;}
 .timeline-date-label, .timeline-band-layer-inner {font: bold 20px/20px "Museo Sans 700", museo-sans-n7, museo-sans, sans-serif; color:#666;}
@@ -270,6 +273,8 @@ box-shadow: rgba(0, 0, 0, 0.5)  2px 2px 7px 1px  ;}
 .timeline-band-layer,
 .timeline-ether-bg,
 .timeline-ether-highlight {cursor:url("../img/drag.png"), move; }
+
+.timeline-ether-highlight {}
 
 
 /*  Children panel */
