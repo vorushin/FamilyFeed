@@ -5,15 +5,16 @@ from __future__ import absolute_import
 import json
 import datetime
 
+from django.core.cache import cache
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect, HttpResponse
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 
 from profiles.models import Child
 from sources import youtube, facebook
 from timeline.utils import age
-from utils import comma_split
+from utils import comma_split, make_uri_title
 from utils.json import ObjectEncoder
 
 EXPECTED_TITLE_LEN = 30
@@ -57,7 +58,7 @@ class FacebookEvent(object):
         if self.description:
             self.text += ' "%s"' % self.description
 
-        
+
         self.title = shorten(self.message or self.description)
         if post.get('link'):
             self.url = post['link']
@@ -95,12 +96,17 @@ def keywords_present(items, keywords, text_func):
     return result
 
 def timeline(request, username, child_slug):
-    child = Child.objects.get(user__username__exact=username, slug__exact=child_slug)
+    child = get_object_or_404(Child, user__username=username, slug=child_slug)
     children = Child.objects.filter(user__username__exact=username)
 
     facebook_events = []
     for facebook_source in child.facebook_sources.all():
-        facebook_events.extend(keywords_present(facebook.list_posts(facebook_source.access_token, first_5=True), comma_split(facebook_source.keywords), facebook.post_text))
+        events_key = '%s_%s' % (facebook_source.uid, make_uri_title(facebook_source.keywords))
+        events = cache.get(events_key)
+        if not events:
+            events = keywords_present(facebook.list_posts(facebook_source.access_token, first_5=False), comma_split(facebook_source.keywords), facebook.post_text)
+            cache.set(events_key, events, 24 * 3600)
+        facebook_events.extend(events)
 
     youtube_source = child.youtube_source
     youtube_events = []
