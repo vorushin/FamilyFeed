@@ -15,6 +15,9 @@ function showDemo() {
 
 function hideDemo() {
     console.log("***** hideDemo");
+    $(".home .timeline-band-input").fadeIn(200);   
+    $(".home .action_btns").animate({top:500},200); 
+    $(".home .action_btns a.green_grad").text('See a Demo');
     $(".home .action_btns a.green_grad").click(function() {
         showDemo();
     });
