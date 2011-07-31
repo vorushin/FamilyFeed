@@ -52,5 +52,6 @@ function createTimeline(events) {
         'events': events
     };
     eventSource.loadJSON(json, document.location.href);
-    
+    $('.timeline-event-icon').addClass('video-event');
+    // $('.timeline-event-icon img').addClass('video-event');
 }
