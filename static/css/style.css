@@ -199,7 +199,11 @@ a.icon_source {
 
 .addsource_btns {margin-bottom:20px;}
 
-.source {float:left; position:relative; margin-right:40px; height:40px; padding:10px 15px 10px 50px; border-radius:5px;}
+.source {float:left; position:relative; 
+height: 40px;
+margin-right: 40px;
+padding: 20px 25px 20px 70px;
+ border-radius:5px;}
 .shadow_big {-webkit-box-shadow: rgba(0, 0, 0, 0.5)  2px 2px 7px 1px  ;
 -moz-box-shadow: rgba(0, 0, 0, 0.5)  2px 2px 7px 1px  ;
 box-shadow: rgba(0, 0, 0, 0.5)  2px 2px 7px 1px  ;}
@@ -238,7 +242,7 @@ background:url(../img/yt.png) no-repeat 10px 15px, linear-gradient(top, rgba(255
 
 .source .added_source .delete  {display:block; position:absolute; top:-4px; right:-4px; height:12px; width:12px; border-radius:12px; color:#fff; text-align:center; font: normal 12px/12px Helvetica, Arial, sans-serif; text-decoration:none;}
 .source .add {display:block; height:32px; width:32px;  float:left; margin:5px 0; border-radius:32px;
-position:absolute; top:10px; right:-16px; color:#fff; font: bold 26px/32px Helvetica, Arial, sans-serif; text-align:center; text-decoration:none; }
+position:absolute; top:15px; right:-16px; color:#fff; font: bold 26px/32px Helvetica, Arial, sans-serif; text-align:center; text-decoration:none; }
 
 
 

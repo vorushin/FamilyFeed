@@ -31,7 +31,7 @@ table { font-size:inherit; font:100%; }
 select, input, textarea { font:99% sans-serif; }
 pre, code, kbd, samp { font-family: monospace, sans-serif; }
  
-body, select, input, textarea { color:#444; }
+body, select, input, textarea { color:#555; }
 h1,h2,h3,h4,h5,h6 { font-weight: bold; text-rendering: optimizeLegibility; }
 html { -webkit-font-smoothing: antialiased; }
 a:hover, a:active { outline: none; }
@@ -46,7 +46,7 @@ sup { vertical-align: super; font-size: smaller; }
 
 pre { padding: 15px; white-space: pre; white-space: pre-wrap; white-space: pre-line; word-wrap: break-word; }
 
-input , a[role="button"]{display:block;}
+input {display:block;}
 input[type="radio"] { vertical-align: text-bottom; }
 input[type="checkbox"] { vertical-align: bottom; *vertical-align: baseline; }
 label, input[type=button], input[type=submit], button { cursor: pointer; }
@@ -64,8 +64,12 @@ button {  width: auto; overflow: visible; }
 .hidden { display:none; visibility:hidden; } 
 .visuallyhidden { position:absolute !important; clip: rect(1px 1px 1px 1px); clip: rect(1px, 1px, 1px, 1px); }
 .invisible { visibility: hidden; }
-.clearfix:after { content: "."; display: block; height: 0; clear: both; visibility: hidden; }
-.clearfix { display: inline-block; }
-* html .clearfix { height: 1%; }
-.clearfix { display: block; }
+
+.cf:before,
+.cf:after {
+    content:"";
+    display:table
+}
+.cf:after { clear:both }
+.cf { zoom:1 }
 
