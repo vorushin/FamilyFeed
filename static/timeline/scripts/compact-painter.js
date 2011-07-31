@@ -462,8 +462,8 @@ Timeline.CompactEventPainter.prototype.paintStackedPreciseInstantEvents = functi
         iconDiv.style.zIndex = (records.length - index);
         iconDiv.appendChild(img);
         iconDiv.setAttribute("index", index);
-        iconDiv.setAttribute("event-id", evt.getProperty("id"));
-        iconDiv.setAttribute("url", evt.getProperty("url"));
+        // iconDiv.setAttribute("event-id", evt.getProperty("id"));
+        // iconDiv.setAttribute("url", evt.getProperty("url"));
         iconDiv.onmouseover = onMouseOver;
         
         iconStackDiv.firstChild.appendChild(iconDiv);
@@ -851,14 +851,13 @@ Timeline.CompactEventPainter.prototype._fitTracks = function(anchorPixel, newTra
 
 
 Timeline.CompactEventPainter.prototype._paintEventIcon = function(evt, commonData, iconData, top, left, metrics, theme) {
-    // console.log("****** _paintEventIcon");
     var img = SimileAjax.Graphics.createTranslucentImage(iconData.url);
     var iconDiv = this._timeline.getDocument().createElement("div");
     iconDiv.className = 'timeline-event-icon' + ("className" in iconData ? (" " + iconData.className) : "");
     iconDiv.style.left = left + "px";
     iconDiv.style.top = top + "px";
-    iconDiv.setAttribute("event-id", evt.getProperty("id"));
-    iconDiv.setAttribute("url", evt.getProperty("url"));
+    // iconDiv.setAttribute("event-id", evt.getProperty("id"));
+    // iconDiv.setAttribute("url", evt.getProperty("url"));
     iconDiv.appendChild(img);
     
     if ("tooltip" in commonData && typeof commonData.tooltip == "string") {
