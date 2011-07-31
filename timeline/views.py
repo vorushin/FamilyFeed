@@ -20,7 +20,7 @@ def shorten(text):
         return text[0:trim_index] + "..."
     else:
         return text
-    
+
 
 def event_date(date_time):
     return datetime.date(year=date_time.year, month=date_time.month, day=date_time.day).isoformat()
@@ -78,6 +78,7 @@ def keywords_present(items, keywords, text_func):
         for keyword in keywords:
             if text.find(keyword) != -1:
                 items.append(item)
+                break
     return items
 
 def timeline(request, username, child_slug):

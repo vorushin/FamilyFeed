@@ -14,6 +14,7 @@ from profiles.forms import ChildForm, RegistrationForm
 from profiles.models import Child, FacebookSource
 from sources import youtube, facebook
 
+from timeline.views import keywords_present, YouTubeEvent
 from utils.json import ObjectEncoder
 from utils.fb import facebook_callback, request_facebook_permissions
 
@@ -129,14 +130,29 @@ def get_facebook_data_ajax(request, username, child_slug):
     return render(request, 'profiles/facebook_data.html', {'data': data})
 
 
-def split_keywords(keywords):
+def get_youtube_data_ajax(request, username, child_slug):
+    child = get_object_or_404(Child, user__username=username, slug=child_slug)
+    keywords = _split(request.GET['keywords'])
+    youtube_events = []
+    for username in _split(child.youtube_source.usernames):
+        youtube_events += youtube.list_videos(username)
+    youtube_events = keywords_present(youtube_events,
+                                      [],
+                                      lambda video: video.title.decode('utf-8'))
+    youtube_events = [YouTubeEvent(video) for video in youtube_events]
+    return render(request,
+                  'profiles/youtube_data.html',
+                  {'youtube_events': youtube_events})
+
+
+def _split(keywords):
     return [k.strip() for k in keywords.split(',')]
 
 
 def _facebook_feed_items(access_token, keywords):
     graph_url = 'https://graph.facebook.com/me/feed?access_token=%s' % \
         access_token
-    keywords = split_keywords(keywords)
+    keywords = _split(keywords)
     items = []
 
     resp = json.loads(urlopen(graph_url).read())
