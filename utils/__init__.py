@@ -23,4 +23,6 @@ def make_uri_title(value):
 
 
 def comma_split(keywords):
+    if not keywords.strip():
+        return []
     return [k.strip() for k in keywords.split(',')]
