@@ -10,7 +10,7 @@ See live example - [http://familyfeed.vorushin.ru/vorushins/Marta/](http://famil
 
 # Team
 
-* [Igor Sklyarevsky](skliarevsky.org), designer
+* [Igor Sklyarevsky](http://skliarevsky.org), designer
 * [Matvey Maslov](http://twitter.com/matveym), programmer
 * [Roman Vorushin](http://vorushin.ru), programmer
 
