@@ -12,6 +12,13 @@ class Child(models.Model):
     def facebook_sources(self):
         return FacebookSource.objects.filter(child=self)
 
+    @property
+    def facebook_keywords(self):
+        if self.facebook_sources.exists():
+            return self.facebook_sources[0].keywords
+        else:
+            return ''
+
 
 class DataSource(models.Model):
     child = models.ForeignKey(Child)

@@ -27,9 +27,14 @@
                       (data) -> $('div.add_facebook div.source_preview').html(data))
                 return false
 
-            $('div.add_facebook a.btn').click ->
+            $('div.add_facebook a.save').click ->
                 $('div.add_facebook form').submit()
                 return false
+
+            $('a.btn_cancel').click ->
+                $('div.add_twitter').hide()
+                $('div.add_youtube').hide()
+                $('div.add_facebook').hide()
     {% endinlinecoffeescript %}
     </script>
 {% endblock extrahead %}
@@ -91,9 +96,9 @@
 
         <label for="facebook_searchfor">Search for:</label>
         <span class="suggest">You can add a few words separated by commas</span>
-        <input type="text" name="keywords" class="text" id="facebook_searchfor" value="{{ child.name }}, ">
+        <input type="text" name="keywords" class="text" id="facebook_searchfor" value="{{ child.facebook_keywords }}">
       </form>
-      <a href="#" role="button" class="btn shadow_big red_grad"><strong>Save</strong></a>
+      <a href="#" role="button" class="btn save shadow_big red_grad"><strong>Save</strong></a>
       <a href="#" class="btn green_grad shadow_big preview" role="button"><strong>Preview</strong></a>
       <a href="#" class="btn_cancel">Cancel</a>
 
