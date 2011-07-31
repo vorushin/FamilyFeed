@@ -62,8 +62,10 @@ class FacebookEvent(object):
         self.title = shorten(self.message or self.description)
         if post.get('link'):
             self.url = post['link']
-        if post.get('picture'):
-            self.icon = post['picture']
+        
+        post_picture = post.get('picture')
+        if post_picture and post_picture.find('safe_image.php') == -1:
+            self.icon = post_picture
         self.classname = 'facebook-label'
         self.iconClassName = 'facebook-icon'
 
