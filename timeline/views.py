@@ -13,6 +13,7 @@ from django.shortcuts import render
 from profiles.models import Child
 from sources import youtube, facebook
 from timeline.utils import age
+from utils import comma_split
 from utils.json import ObjectEncoder
 
 EXPECTED_TITLE_LEN = 30
@@ -80,13 +81,6 @@ def logged_in(request, username):
 
     return HttpResponseRedirect(reverse('timeline.views.timeline', args=[username, children[0].slug]))
 
-def list_keywords(keywords_text):
-    keywords_text = keywords_text.strip()
-    if keywords_text:
-        return [keyword.strip() for keyword in keywords_text.split(",")]
-    else:
-        return []
-
 def keywords_present(items, keywords, text_func):
     result = []
     if not keywords:
@@ -103,15 +97,22 @@ def keywords_present(items, keywords, text_func):
 def timeline(request, username, child_slug):
     child = Child.objects.get(user__username__exact=username, slug__exact=child_slug)
     children = Child.objects.filter(user__username__exact=username)
+
     facebook_events = []
     for facebook_source in child.facebook_sources.all():
-        facebook_events.extend(keywords_present(facebook.list_posts(facebook_source.access_token, first_5=True), list_keywords(facebook_source.keywords), facebook.post_text))
+        facebook_events.extend(keywords_present(facebook.list_posts(facebook_source.access_token, first_5=True), comma_split(facebook_source.keywords), facebook.post_text))
 
-    youtube_events = keywords_present(youtube.list_videos('vorushin'), [], lambda video: video.title)
+    youtube_source = child.youtube_source
+    youtube_events = []
+    if youtube_source.usernames:
+        for youtube_user in comma_split(youtube_source.usernames):
+            youtube_events.extend(keywords_present(youtube.list_videos(youtube_user), comma_split(youtube_source.keywords), lambda video: video.title))
+
 
     events = []
     events.extend([FacebookEvent(post) for post in facebook_events])
     events.extend([YouTubeEvent(video) for video in youtube_events])
+
     events_json = json.dumps(events, cls=ObjectEncoder)
     children_data = [dict(name=child.name, slug=child.slug, age=age(child.birthdate)) for child in children]
     return render(request, "timeline/timeline.html",
