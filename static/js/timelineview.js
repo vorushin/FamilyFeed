@@ -13,6 +13,9 @@ function createTimeline(events, eventInterval, scaleInterval) {
             'swf'              : { 'wmode' : 'transparent' }
         });
     };
+    // var now = new Date();
+    // var timelineDate = Date(now.getTime() - 3 * 30 * 24 * 60 * 60 * 1000);
+    // console.log("****** " + timelineDate);
     var eventSource = new Timeline.DefaultEventSource();
     var bandInfos = [
         Timeline.createBandInfo({
