@@ -13,6 +13,15 @@ from sources import youtube, facebook
 from timeline.utils import age
 from utils.json import ObjectEncoder
 
+EXPECTED_TITLE_LEN = 30
+def shorten(text):
+    trim_index = text.find(' ', EXPECTED_TITLE_LEN)
+    if trim_index != -1:
+        return text[0:trim_index] + "..."
+    else:
+        return text
+    
+
 def event_date(date_time):
     return datetime.date(year=date_time.year, month=date_time.month, day=date_time.day).isoformat()
 
@@ -32,7 +41,7 @@ class FacebookEvent(object):
 
     def __init__(self, post):
         self.start = event_date(datetime.datetime.strptime(post['created_time'], '%Y-%m-%dT%H:%M:%S+0000'))
-        self.title = post['message']
+        self.title = shorten(post['message'])
         if post.get('picture'):
             self.icon = post['picture']
             # self.classname = 'picture-label'
