@@ -48,7 +48,7 @@
             $('div.add_youtube a.preview').click ->
                 $('div.loading').show()
                 $.get '{% url profiles.views.get_youtube_data_ajax child.user.username child.slug %}',
-                      {'keywords': $('#youtube_searchfor').val()},
+                      {'keywords': $('#youtube_searchfor').val(), 'usernames': $('#youtube_usernames').val()},
                       (data) ->
                         $('div.loading').hide()
                         $('div.add_youtube div.source_preview').html(data)

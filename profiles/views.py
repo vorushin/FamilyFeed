@@ -141,8 +141,9 @@ def get_facebook_data_ajax(request, username, child_slug):
 def get_youtube_data_ajax(request, username, child_slug):
     child = get_object_or_404(Child, user__username=username, slug=child_slug)
     keywords = comma_split(request.GET['keywords'])
+    usernames = comma_split(request.GET['usernames'])
     youtube_events = []
-    for username in comma_split(child.youtube_source.usernames):
+    for username in usernames:
         youtube_events += youtube.list_videos(username)
     youtube_events = keywords_present(youtube_events,
                                       keywords,
