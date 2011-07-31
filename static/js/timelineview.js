@@ -16,22 +16,32 @@ function createTimeline(events, eventInterval, scaleInterval) {
             break;
 
             case 'facebook':
-            var message = event.getProperty("message");
-            $.fancybox({
-                'titleShow'        : false,
-                'transitionIn'     : 'elastic',
-                'transitionOut'    : 'elastic',
-                'content'          : message
-            });
+            var url = event.getProperty("url");
+            if (url != undefined) {
+                $.fancybox({
+                    'titleShow'        : false,
+                    'transitionIn'     : 'elastic',
+                    'transitionOut'    : 'elastic',
+                    'type'             : 'iframe',
+                    'href'             : url
+                    // 'href'             : "http://itc.ua"
+                });
+                
+            } else {
+                var message = event.getProperty("message");
+                $.fancybox({
+                    'titleShow'        : false,
+                    'transitionIn'     : 'elastic',
+                    'transitionOut'    : 'elastic',
+                    'content'          : message
+                });
+            }
             break;
             
         }
-        // if (type == undefined) {
-        // } else {
-        // }
     };
     var now = new Date();
-    var fewMonthsAgo = new Date(now.getTime() - 2 * 30 * 24 * 60 * 60 * 1000);
+    var fewMonthsAgo = new Date(now.getTime() - 1 * 30 * 24 * 60 * 60 * 1000);
     var eventSource = new Timeline.DefaultEventSource();
     var bandInfos = [
         Timeline.createBandInfo({

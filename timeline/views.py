@@ -46,6 +46,8 @@ class FacebookEvent(object):
         self.start = event_date(datetime.datetime.strptime(post['created_time'], '%Y-%m-%dT%H:%M:%S+0000'))
         self.title = shorten(post['message'])
         self.message = post['message']
+        if post.get('link'):
+            self.url = post['link']
         if post.get('picture'):
             self.icon = post['picture']
         self.classname = 'facebook-label'
