@@ -1,5 +1,6 @@
 import json
 
+from django.contrib import messages
 from django.contrib.auth import authenticate, login as auth_login
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
@@ -43,6 +44,7 @@ def add_child(request):
         form = ChildForm(request.POST, user=request.user)
         if form.is_valid():
             child = form.save()
+            messages.success(request, u'%s, nice to meet you!' % child.name)
             url = reverse(
                 'profiles.views.edit_child',
                 args=[request.user.username, make_uri_title(child.name)])

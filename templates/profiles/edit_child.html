@@ -8,17 +8,17 @@
 
 {% block content %}
   <div class="register step2 cf">
-    <p class="form_message shadow_big"><strong>Nice to meet with Marta!</strong></p>
     <div class="child_saved cf">
-      <div class="inlineedit name"><a href="" class="edit dotted" title="Click to edit">Marta<span class="inline_label">name</span></a></div>
-      <div class="inlineedit date"><a href="" class="edit dotted" title="Click to edit">2010-09-22<span class="inline_label">date of birth</span></a></div>
+      <div class="inlineedit name"><a href="" class="edit dotted" title="Click to edit">{{ child.name }}<span class="inline_label">name</span></a></div>
+      <div class="inlineedit date"><a href="" class="edit dotted" title="Click to edit">{{ child.birthdate|date:"Y-m-d" }}<span class="inline_label">date of birth</span></a></div>
     </div>
   </div>
   <h2>Add sources</h2>
   <p>Now let's add a few resources that contain photos, videos
-    and other stuff about <em>Marta</em></p>
+    and other stuff about <em>{{ child.name }}</em></p>
   <div class="addsource_btns cf">
     <div class="source source_facebook shadow_big">
+        {% comment %}
         <div class="added_source cf">
         <img src="http://a1.twimg.com/profile_images/1468944732/contactango_normal.jpeg" alt="Roman Vorushin"  class="pic" />
         <a href="#" title="Delete source" class="delete shadow_small red_grad">×</a>
@@ -27,27 +27,33 @@
         <img src="http://www.weblancer.net/files/portfolio/632/63207/userpic_s.jpg" alt="Roman Vorushin"  class="pic" />
         <a href="#" title="Delete source" class="delete shadow_small red_grad">×</a>
         </div>
+        {% endcomment %}
         <a href="#" class="add green_grad shadow_big" title="Add source">+</a>
     </div>
 
     <div class="source source_twitter shadow_big">
+        {% comment %}
         <div class="added_source cf">
         <img src="http://a1.twimg.com/profile_images/1468944732/contactango_normal.jpeg" alt="Roman Vorushin"  class="pic" />
         <a href="#" title="Delete source" class="delete shadow_small red_grad">×</a>
         </div>
+        {% endcomment %}
         <a href="#" class="add green_grad shadow_big" title="Add source">+</a>
     </div>
 
     <div class="source source_youtube shadow_big">
+        {% comment %}
         <div class="added_source cf">
         <img src="http://a1.twimg.com/profile_images/1468944732/contactango_normal.jpeg" alt="Roman Vorushin"  class="pic" />
         <a href="#" title="Delete source" class="delete shadow_small red_grad">×</a>
         </div>
+        {% endcomment %}
         <a href="#" class="add green_grad shadow_big" title="Add source">+</a>
     </div>
   </div>
 
   <div class="addsource add_twitter cf">
+    {% comment %}
     <div class="source_form">
       <form action="#" сlass="cf">
         <label for="twitter_accounts">Twitter usernames</label>
@@ -57,7 +63,10 @@
         <span class="suggest">You can add a few words separated by commas</span>
         <input type="text" class="text" id="twitter_searchfor" value="Martha">
       </form>
-      <a href="#" role="button" class="btn shadow_big red_grad"><strong>Save these sources</strong></a> <a href="#" class="btn_cancel">Cancel</a> </div>
+      <a href="#" role="button" class="btn shadow_big red_grad"><strong>Save these sources</strong></a> <a href="#" class="btn_cancel">Cancel</a>
+    </div>
+    {% endcomment %}
+    {% comment %}
     <div class="source_preview">
       <h3>Preview feed:</h3>
       <p class="suggest">You can remove some of the results, unless you want to add them to the feed</p>
@@ -74,5 +83,6 @@
         <div class="tweet_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nunc tortor, imperdiet vel tincidunt ac, interdum sit amet justo</div>
         <a href="#" class="post_delete red_grad shadow_small">×</a> </div>
     </div>
+    {% endcomment %}
   </div>
 {% endblock content %}
