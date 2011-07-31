@@ -9,7 +9,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render
 
 from profiles.models import Child
-from sources import youtube
+from sources import youtube, facebook
 from timeline.utils import age
 from utils.json import ObjectEncoder
 
@@ -22,6 +22,13 @@ class YouTubeEvent(object):
         self.caption = video.title
         self.icon = video.thumbnails[1].url
         self.url = video.url
+        self.classname = 'video-event'
+
+class FacebookEvent(object):
+
+    def __init__(self, post):
+        self.start = post['created_time']
+        self.title = post['message']
 
 
 def start(request):
@@ -39,11 +46,24 @@ def logged_in(request, username):
     return HttpResponseRedirect(reverse('timeline.views.timeline', args=[username, children[0].slug]))
 
 def timeline(request, username, child_slug):
-    events = json.dumps([YouTubeEvent(video) for video in youtube.list_videos('vorushin')], cls=ObjectEncoder)
-    children = [dict(name='Marta', slug='marta', age=age(datetime.datetime(2010, 9, 22))), 
-                dict(name='Eva', slug='eva', age=age(datetime.datetime(2009, 4, 18)))]
+    child = Child.objects.get(user__username__exact=username, slug__exact=child_slug)
+    children = Child.objects.filter(user__username__exact=username)
+    facebook_events = []
+    for facebook_source in child.facebook_sources:
+        # TODO keywords
+        facebook_events.extend(facebook.list_posts(facebook_source.access_token, first_5=True))
+        print "+++++ ", facebook_source.access_token
+    
+    print "***** ", facebook_events
+    
+    # TODO keywords
+    events = []
+    events.extend([FacebookEvent(post) for post in facebook_events])
+    events.extend([YouTubeEvent(video) for video in youtube.list_videos('vorushin')])
+    events_json = json.dumps(events, cls=ObjectEncoder)
+    children_data = [dict(name=child.name, slug=child.slug, age=age(child.birthdate)) for child in children]
     return render(request, "timeline/timeline.html", 
-                  { 'events' : events, 'children' : children, 'username' : username, 'current_child_slug' : child_slug})
+                  { 'events' : events_json, 'children' : children_data, 'username' : username, 'current_child_slug' : child_slug})
 
 # def events(request):
 #     return HttpResponse(json.dumps(youtube.list_videos(username), cls=ObjectEncoder))
