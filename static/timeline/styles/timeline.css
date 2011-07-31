@@ -63,3 +63,4 @@ border:none;
     height:     100%;
 }
 
+.video-event:after {content: url(../../img/)}
