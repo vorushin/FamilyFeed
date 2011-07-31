@@ -462,10 +462,11 @@ Timeline.CompactEventPainter.prototype.paintStackedPreciseInstantEvents = functi
         iconDiv.style.zIndex = (records.length - index);
         iconDiv.appendChild(img);
         iconDiv.setAttribute("index", index);
+        iconDiv.title = tooltip;
         // iconDiv.setAttribute("event-id", evt.getProperty("id"));
         // iconDiv.setAttribute("url", evt.getProperty("url"));
         iconDiv.onmouseover = onMouseOver;
-        
+
         iconStackDiv.firstChild.appendChild(iconDiv);
         
         var clickHandler = function(elmt, domEvt, target) {
@@ -859,7 +860,7 @@ Timeline.CompactEventPainter.prototype._paintEventIcon = function(evt, commonDat
     // iconDiv.setAttribute("event-id", evt.getProperty("id"));
     // iconDiv.setAttribute("url", evt.getProperty("url"));
     iconDiv.appendChild(img);
-    
+
     if ("tooltip" in commonData && typeof commonData.tooltip == "string") {
         iconDiv.title = commonData.tooltip;
     }
