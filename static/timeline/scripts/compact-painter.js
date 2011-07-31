@@ -463,6 +463,9 @@ Timeline.CompactEventPainter.prototype.paintStackedPreciseInstantEvents = functi
         iconDiv.appendChild(img);
         iconDiv.setAttribute("index", index);
         iconDiv.title = tooltip;
+        if (evt.getProperty("iconClassName") != undefined) {
+            iconDiv.className += " " + evt.getProperty("iconClassName");
+        }
         // iconDiv.setAttribute("event-id", evt.getProperty("id"));
         // iconDiv.setAttribute("url", evt.getProperty("url"));
         iconDiv.onmouseover = onMouseOver;
@@ -859,6 +862,9 @@ Timeline.CompactEventPainter.prototype._paintEventIcon = function(evt, commonDat
     iconDiv.style.top = top + "px";
     // iconDiv.setAttribute("event-id", evt.getProperty("id"));
     // iconDiv.setAttribute("url", evt.getProperty("url"));
+    if (evt.getProperty("iconClassName") != undefined) {
+        iconDiv.className += " " + evt.getProperty("iconClassName");
+    }
     iconDiv.appendChild(img);
 
     if ("tooltip" in commonData && typeof commonData.tooltip == "string") {

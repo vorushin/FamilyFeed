@@ -1,15 +1,21 @@
 function createTimeline(events, eventInterval, scaleInterval) {
     Timeline.CompactEventPainter.prototype._showBubble = function(x, y, events) {
-        var url = events[0].getProperty("url");
+        var videoUrl = events[0].getProperty("videoUrl");
+        if (videoUrl == undefined) {
+            return;
+        }
         $.fancybox({
             'titleShow'        : false,
             'transitionIn'     : 'elastic',
             'transitionOut'    : 'elastic',
-            'href'             : url + "&fs=1&autoplay=1",
+            'href'             : videoUrl + "&fs=1&autoplay=1",
             'type'             : 'swf',
             'swf'              : { 'wmode' : 'transparent' }
         });
     };
+    // var now = new Date();
+    // var timelineDate = Date(now.getTime() - 3 * 30 * 24 * 60 * 60 * 1000);
+    // console.log("****** " + timelineDate);
     var eventSource = new Timeline.DefaultEventSource();
     var bandInfos = [
         Timeline.createBandInfo({
@@ -29,7 +35,6 @@ function createTimeline(events, eventInterval, scaleInterval) {
                 stackConcurrentPreciseInstantEvents: {
                     limit: 5,
                     moreMessageTemplate:    "%0 More Events",
-                    icon:                   "no-image-80.png", // default icon in stacks
                     iconWidth:              120,
                     iconHeight:             90
                 }
@@ -61,12 +66,4 @@ function createTimeline(events, eventInterval, scaleInterval) {
         'events': events
     };
     eventSource.loadJSON(json, document.location.href);
-    $('.timeline-event-icon').addClass('video-event');
-    // TODO lookup titles using JSON events list by thumbnail url...
-    // $('.timeline-event-icon').each(function() {
-    //     var title = $(this).attr("title");
-    //     console.log("**** " + title);
-    //     $(this).children().attr("title", "ABC");
-    //     // $(this).children().attr("title", title);
-    // });
 }
