@@ -1,4 +1,6 @@
 import json
+from urllib import unquote
+from urllib2 import urlopen
 
 from django.contrib import messages
 from django.contrib.auth import authenticate, login as auth_login
@@ -83,7 +85,8 @@ def facebook_login_done(request, access_token):
 @login_required
 def add_facebook_profile(request, username, child_slug):
     permissions = ['offline_access', 'user_status', 'user_videos',
-        'user_photos', 'user_notes']
+        'user_photos', 'user_notes', 'friends_photos', 'user_photo_video_tags',
+        'friends_photo_video_tags', 'read_stream']
     url = reverse(add_facebook_profile_done, args=[username, child_slug])
     return request_facebook_permissions(request, permissions, url)
 
@@ -113,3 +116,34 @@ def add_facebook_profile_done(request, access_token, username, child_slug):
                                                access_token=access_token)
 
     return render(request, 'profiles/add_facebook_profile_done.html')
+
+
+def get_facebook_data_ajax(request, username, child_slug):
+    child = get_object_or_404(Child, user__username=username, slug=child_slug)
+    #keywords = unquote(str(request.GET['keywords'])).decode('utf-8')
+    keywords = request.GET['keywords']
+    data = []
+    for source in child.facebook_sources:
+        for item in _facebook_feed_items(source.access_token, keywords):
+            data.append(item)
+
+    return render(request, 'profiles/facebook_data.html', {'data': data})
+
+
+def _facebook_feed_items(access_token, keywords):
+    graph_url = 'https://graph.facebook.com/me/feed?access_token=%s' % \
+        access_token
+    keywords = [k.strip() for k in keywords.split(',')]
+    items = []
+
+    resp = json.loads(urlopen(graph_url).read())
+    while resp['data']:
+        for item in resp['data']:
+            text = item.get('message', u'') + item.get('description', u'')
+            for keyword in keywords:
+                if text.find(keyword) != -1:
+                    items.append(item)
+                    break
+        resp = json.loads(urlopen(resp['paging']['next']).read())
+
+    return items
