@@ -17,6 +17,9 @@ urlpatterns = patterns('profiles.views',
 
     url(r'^(?P<username>[\w.@+-]+)/(?P<child_slug>[\w.@+-]+)/fb_data_ajax/$',
         'get_facebook_data_ajax'),
+
+    url(r'^(?P<username>[\w.@+-]+)/(?P<child_slug>[\w.@+-]+)/edit/safe_fb/$',
+         'save_facebook_source'),
 )
 
 urlpatterns += patterns('',

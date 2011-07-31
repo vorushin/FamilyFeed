@@ -1,5 +1,4 @@
 import json
-from urllib import unquote
 from urllib2 import urlopen
 
 from django.contrib import messages
@@ -9,6 +8,7 @@ from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import get_object_or_404, render
+from django.views.decorators.http import require_POST
 
 from profiles.forms import ChildForm, RegistrationForm
 from profiles.models import Child, FacebookSource
@@ -130,10 +130,14 @@ def get_facebook_data_ajax(request, username, child_slug):
     return render(request, 'profiles/facebook_data.html', {'data': data})
 
 
+def split_keywords(keywords):
+    return [k.strip() for k in keywords.split(',')]
+
+
 def _facebook_feed_items(access_token, keywords):
     graph_url = 'https://graph.facebook.com/me/feed?access_token=%s' % \
         access_token
-    keywords = [k.strip() for k in keywords.split(',')]
+    keywords = split_keywords(keywords)
     items = []
 
     resp = json.loads(urlopen(graph_url).read())
@@ -147,3 +151,12 @@ def _facebook_feed_items(access_token, keywords):
         resp = json.loads(urlopen(resp['paging']['next']).read())
 
     return items
+
+
+@require_POST
+def save_facebook_source(request, username, child_slug):
+    child = get_object_or_404(Child, user__username=username, slug=child_slug)
+    keywords = request.POST['keywords']
+    FacebookSource.objects.filter(child=child).update(keywords=keywords)
+    return HttpResponseRedirect(reverse(edit_child,
+                                        args=[username, child_slug]))
