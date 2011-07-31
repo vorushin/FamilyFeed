@@ -7,15 +7,9 @@
     {% inlinecoffeescript %}
         $(document).ready ->
             $('div.source_facebook a.view').click ->
-                $('div.add_twitter').hide()
                 $('div.add_youtube').hide()
                 $('div.add_facebook').show()
                 return false
-
-            $('div.source_youtube a.view').click ->
-                $('div.add_facebook').hide()
-                $('div.add_twitter').hide()
-                $('div.add_youtube').show()
 
             $('div.source_facebook a.add').click ->
                 window.open(
@@ -36,12 +30,29 @@
                 $('div.add_facebook form').submit()
                 return false
 
+
+
+            show_youtube = ->
+                $('div.add_facebook').hide()
+                $('div.add_youtube').show()
+                return false
+
+            $('div.source_youtube a.view').click(show_youtube)
+            $('div.source_youtube a.add').click ->
+                show_youtube()
+                $('div.add_youtube input[name=usernames]').focus()
+
+            $('div.add_youtube a.preview').click ->
+                $.get('{% url profiles.views.get_youtube_data_ajax child.user.username child.slug %}',
+                      {'keywords': $('#youtube_searchfor').val()},
+                      (data) -> $('div.add_youtube div.source_preview').html(data))
+                return false
+
             $('div.add_youtube a.save').click ->
                 $('div.add_youtube form').submit()
                 return false
 
             $('a.btn_cancel').click ->
-                $('div.add_twitter').hide()
                 $('div.add_youtube').hide()
                 $('div.add_facebook').hide()
     {% endinlinecoffeescript %}
@@ -69,16 +80,6 @@
                 <a href="#" title="Delete source" class="delete shadow_small red_grad">×</a>
             </div>
         {% endfor %}
-        <a href="#" class="add green_grad shadow_big" title="Add source">+</a>
-    </div>
-
-    <div class="source source_twitter shadow_big">
-        {% comment %}
-        <div class="added_source cf">
-        <img src="http://a1.twimg.com/profile_images/1468944732/contactango_normal.jpeg" alt="Roman Vorushin"  class="pic" />
-        <a href="#" title="Delete source" class="delete shadow_small red_grad">×</a>
-        </div>
-        {% endcomment %}
         <a href="#" class="add green_grad shadow_big" title="Add source">+</a>
     </div>
 
@@ -128,35 +129,18 @@
     </div>
   </div>
 
-  <div class="addsource add_twitter cf" style="display: none;">
-    <div class="source_form">
-      <form action="#" сlass="cf">
-        <label for="twitter_accounts">Twitter usernames</label>
-        <span class="suggest">You can add a few usernames separated by commas (for example your's and your spouse's)</span>
-        <input type="text" class="text" id="twitter_accounts" placeholder="@" >
-        <label for="twitter_searchfor">Search for:</label>
-        <span class="suggest">You can add a few words separated by commas</span>
-        <input type="text" class="text" id="twitter_searchfor" value="Martha">
-      </form>
-      <a href="#" role="button" class="btn shadow_big red_grad"><strong>Save these sources</strong></a> <a href="#" class="btn_cancel">Cancel</a>
-    </div>
-
-    <div class="source_preview">
-    </div>
-  </div>
-
   <div class="addsource add_youtube cf" style="display: none;">
     <div class="source_form">
       <form method="POST" action="{% url profiles.views.save_youtube_source child.user.username child.slug %}" сlass="cf">
         {% csrf_token %}
 
-        <label for="twitter_accounts">Youtube usernames</label>
+        <label for="youtube_usernames">Youtube usernames</label>
         <span class="suggest">Add a few youtube usernames separated by commas</span>
-        <input type="text" name="usernames" value="{{ child.youtube_source.usernames }}" class="text" id="youtube_usernames" placeholder="" >
+        <input type="text" name="usernames" value="{{ child.youtube_source.usernames|default:"" }}" class="text" id="youtube_usernames" placeholder="" >
 
         <label for="facebook_searchfor">Search for:</label>
         <span class="suggest">You can add a few words separated by commas</span>
-        <input type="text" name="keywords" value="{{ child.youtube_source.keywords }}" class="text" id="youtube_searchfor" value="{{ child.youtube_keywords }}">
+        <input type="text" name="keywords" value="{{ child.youtube_source.keywords|default:child.name }}" class="text" id="youtube_searchfor" value="{{ child.youtube_keywords }}">
       </form>
       <a href="#" role="button" class="btn save shadow_big red_grad"><strong>Save</strong></a>
       <a href="#" class="btn green_grad shadow_big preview" role="button"><strong>Preview</strong></a>
