@@ -6,6 +6,8 @@ You can create account for your kid, and add data sources (currently facebook an
 We will scan these sources using keywords you provided and show everything we
 found on a timeline.
 
+See live example - [http://familyfeed.vorushin.ru/vorushins/Marta/](http://familyfeed.vorushin.ru/vorushins/Marta/)
+
 # Team
 
 * [Igor Sklyarevsky](skliarevsky.org), designer
