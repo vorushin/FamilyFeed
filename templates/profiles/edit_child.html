@@ -7,6 +7,7 @@
     {% inlinecoffeescript %}
         $(document).ready ->
             $('div.source_facebook a.view').click ->
+                $('div.go_to_timeline').hide()
                 $('div.add_youtube').hide()
                 $('div.add_facebook').show()
                 return false
@@ -34,6 +35,7 @@
                 return false
 
             show_youtube = ->
+                $('div.go_to_timeline').hide()
                 $('div.add_facebook').hide()
                 $('div.add_youtube').show()
                 return false
@@ -59,6 +61,7 @@
             $('a.btn_cancel').click ->
                 $('div.add_youtube').hide()
                 $('div.add_facebook').hide()
+                $('div.go_to_timeline').show()
     {% endinlinecoffeescript %}
     </script>
 {% endblock extrahead %}
@@ -151,5 +154,10 @@
     <div class="source_preview">
     </div>
   </div>
+
+  {% if child.facebook_sources.all or child.youtube_source.usernames %}
+  <div class="go_to_timeline"><a href="{% url timeline.views.timeline child.user.username child.slug %}" class="btn red_grad shadow_big" role="button"><strong>Go to timeline</strong></a></div>
+  {% endif %}
+
   </div>
 {% endblock content %}
