@@ -69,7 +69,7 @@
 	position: relative;
 	width: 100%;
 	height: 100%;
-	background: #fff;
+/*	background: #fff; */
 }
 
 #fancybox-content {
@@ -78,9 +78,11 @@
 	padding: 0;
 	outline: none;
 	position: relative;
-	overflow: hidden;
+/*	overflow: hidden; */
 	z-index: 1102;
-	border: 0px solid #fff;
+/*	border: 0px solid #fff; */
+font: bold 40px/46px museo-sans, sans-serif; font-weight:900;
+color:#fff;
 }
 
 #fancybox-hide-sel-frame {
