@@ -15,12 +15,6 @@ class YoutubeVideo(object):
         self.thumbnails = entry.media.thumbnail
         self.url = entry.media.content[0].url
 
-    # def __getattr__(self, attr):
-    #     value = getattr(self.entry, attr) 
-    #     if isinstance(value, atom.Date):
-    #         return datetime.datetime.strptime(value.text, '%Y-%m-%dT%H:%M:%S.%fZ')
-    #     return value.text
-
     def json(self):
         return self.__dict__
 
