@@ -4,7 +4,7 @@ urlpatterns = patterns('profiles.views',
     url(r'^registration/$', 'registration'),
 
     url(r'^add_child/$', 'add_child'),
-    url(r'^(?P<username>[\w.@+-]+)/(?P<child_slug>[\w.@+-]+)/edit$',
+    url(r'^(?P<username>[\w.@+-]+)/(?P<child_slug>[\w.@+-]+)/edit/$',
          'edit_child'),
     url(r'^feeds/youtube$', 'youtube_feed'),
     url(r'^feeds/facebook$', 'facebook_feed'),
