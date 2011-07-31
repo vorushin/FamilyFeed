@@ -20,7 +20,7 @@ header .inner { position:relative; height:40px; }
 header a {text-decoration:none;}
 header a .logo {
     color:#fff;
-    font: bold 22px/40px museo-sans-n7, museo-sans, sans-serif;
+    font: bold 22px/40px museo-sans, sans-serif; font-weight:700;
     text-shadow: #000 0px -1px 0px;
     padding-left:55px;
     background:url(../img/logo.png) 0 50% no-repeat;
@@ -31,15 +31,15 @@ header .login, header .login a {font: normal 13px/20px sans-serif; color:#fff; }
 header .login a {border-bottom: dotted 1px #fff; text-decoration:none;}
 
 h1 {
-    font: bold 44px/50px museo-sans-n9, museo-sans, sans-serif;
+    font: bold 44px/50px museo-sans, sans-serif; font-weight:900;
     margin:40px 0 10px;
 }
 h2 {
-    font: bold 36px/40px museo-sans-n7, museo-sans, sans-serif;
+    font: bold 36px/40px museo-sans, sans-serif; font-weight:700;
     margin:40px 0 10px;
 }
 h3 {
-    font: bold 22px/30px museo-sans-n7, museo-sans, sans-serif;
+    font: bold 22px/30px museo-sans, sans-serif; font-weight:700;
     margin:20px 0 10px;
 }
 p {
@@ -48,12 +48,12 @@ p {
 }
 label {
     display:block;
-    font: bold 22px/30px museo-sans-n7, museo-sans, sans-serif;
+    font: bold 22px/30px museo-sans, sans-serif; font-weight:700;
     margin: 20px 0 0;
 }
 input.text, input.number {
     height:44px;
-    font: bold 30px/44px museo-sans-n7, museo-sans, sans-serif;
+    font: bold 30px/44px museo-sans, sans-serif; font-weight:700;
 background: #d1d1d1;
 background: -moz-linear-gradient(top, #d1d1d1 0%, #ffffff 35%);
 background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#d1d1d1), color-stop(35%,#ffffff));
@@ -87,7 +87,7 @@ a.btn {
     margin: 20px 0 0;
     padding: 0 20px;
     text-align:center;
-    font: bold 22px/44px museo-sans-n7, museo-sans, sans-serif;
+    font: bold 22px/44px museo-sans, sans-serif; font-weight:700;
     color:#fff;
     border-radius: 44px;
     text-decoration:none;
@@ -202,7 +202,7 @@ a.icon_source {
 
 .child_saved {border-bottom:solid 1px #ccc; padding-bottom:30px; margin-top:30px;}
 .child_saved .inlineedit {float:left; padding:5px; margin-right:10px;}
-.child_saved .inlineedit a {display:block; height:32px; position:relative; font: bold 30px/32px museo-sans-n7, museo-sans, sans-serif; text-decoration:none; color:#c66; border-bottom:dotted 1px #c66; cursor:text;}
+.child_saved .inlineedit a {display:block; height:32px; position:relative; font: bold 30px/32px museo-sans, sans-serif; font-weight:700; text-decoration:none; color:#c66; border-bottom:dotted 1px #c66; cursor:text;}
 .child_saved .inlineedit a:hover {background:#F9EFCA; color:#444;}
 .child_saved .inlineedit a .inline_label {display:block; position:absolute; font:normal 12px/14px sans-serif; text-transform:uppercase; color:#888; bottom:-18px; left:0;}
 
@@ -264,12 +264,12 @@ position: absolute !important;
 top: 160px;
 width: 100%;}
 
-.timeline-event-label {width:200px; font: normal 13px/16px museo-sans-n5, museo-sans, sans-serif; color:#444; margin-left:20px; padding:10px;}
+.timeline-event-label {width:200px; font: normal 13px/16px museo-sans, sans-serif; font-weight:500; color:#444; margin-left:20px; padding:10px;}
 
-.timeline-date-label, .timeline-band-layer-inner {font: normal 20px/20px museo-sans-n5, museo-sans, sans-serif; color:#369 !important;}
+.timeline-date-label, .timeline-band-layer-inner {font: normal 20px/20px museo-sans, sans-serif; font-weight:500; color:#369 !important;}
 .timeline-date-label {font-size:13px; line-height:20px; height:30px !important;}
 .timeline-band-1 .timeline-date-label {font-size:20px; line-height:20px;}
-.timeline-date-label-em {height: 30px !important; color:#444  !important; font: bold 20px/30px museo-sans-n9, museo-sans, sans-serif;}
+.timeline-date-label-em {height: 30px !important; color:#444  !important; font: bold 20px/30px museo-sans, sans-serif; font-weight:900;}
 
 
 /* Pics, Videos, Stacks */
@@ -295,7 +295,7 @@ box-shadow: rgba(0, 0, 0, 0.5)  2px 2px 7px 1px  ;}
 
 .children_panel .child.active {border:2px solid #339900; }
 
-.children_panel .child a.child_on {min-width:140px; border-radius:5px; font: bold 30px/32px museo-sans-n7, museo-sans, sans-serif; color:#c66; text-decoration:none; padding:10px 30px 20px 10px; display:block;}
+.children_panel .child a.child_on {min-width:140px; border-radius:5px; font: bold 30px/32px museo-sans, sans-serif; font-weight:700; color:#c66; text-decoration:none; padding:10px 30px 20px 10px; display:block;}
 .children_panel .child a.child_on:hover {background:#F9EFCA;}
 .children_panel .child.active a.child_on:hover {background:inherit; cursor:default;}
 .children_panel .child span {display:block; position:absolute; font:normal 10px/14px sans-serif; text-transform:uppercase; color:#888; bottom:5px; left:10px;}
@@ -325,9 +325,9 @@ background: url(../img/edit.png) 50% 50% no-repeat, linear-gradient(top, #339900
 
 /* Home */
 .home_title {text-align:center;}
-.home_title h1 {font: bold 60px/70px museo-sans-n9, museo-sans, sans-serif; margin:30px 0 0; color:#B14B4B;}
+.home_title h1 {font: bold 60px/70px museo-sans, sans-serif; font-weight:900; margin:30px 0 0; color:#B14B4B;}
 .home_title h2 {font: normal 24px/30px Georgia, sans-serif; margin:0;}
 
 .action_btns {position:absolute; z-index:999; margin:0 auto; width:100%; text-align:center; top:500px;}
-.action_btns .sep {padding: 0 20px; font: bold 16px/60px museo-sans-n5, museo-sans, sans-serif; color:#fff;}
-.action_btns a.btn {height: 60px; border-radius:60px; font: bold 30px/60px museo-sans-n9, museo-sans, sans-serif; padding: 0 30px; border:none;}
+.action_btns .sep {padding: 0 20px; font: bold 16px/60px museo-sans, sans-serif; font-weight:500; color:#fff;}
+.action_btns a.btn {height: 60px; border-radius:60px; font: bold 30px/60px museo-sans, sans-serif; font-weight:900; padding: 0 30px; border:none;}
