@@ -1,12 +1,13 @@
 function createTimeline(events) {
-    Timeline.CompactEventPainter.prototype._showBubble = function(x, y, evt) {
+    Timeline.CompactEventPainter.prototype._showBubble = function(x, y, events) {
+        var url = events[0].getProperty("url");
         $.fancybox({
             'titleShow'        : false,
             'transitionIn'     : 'elastic',
             'transitionOut'    : 'elastic',
-            'href'             : 'http://www.youtube.com/v/u1zgFlCw8Aw?fs=1',
+            'href'             : url + "&fs=1&autoplay=1",
             'type'             : 'swf',
-            'swf'              : {} //{ 'wmode' : 'transparent' }
+            'swf'              : { 'wmode' : 'transparent' }
         });
     };
     var eventSource = new Timeline.DefaultEventSource();
