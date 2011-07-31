@@ -18,17 +18,17 @@
       <div class="cf">
         <label>His/her birthdate</label>
         <label class="label_min label_year">
-          <input type="number" name="year" class="number year" id="dateofbirth_year" placeholder="Year"  min="1995" max="2011" step="1" required>
+          <input type="number" name="year" class="number year" id="dateofbirth_year" min="1995" max="2011" step="1" tabindex="2" required>
           Year</label>
         <label class="label_min label_year">
-          <input type="number" name="month" class="number month" id="dateofbirth_month" placeholder="Month"  min="01" max="12" step="1" required>
+          <input type="number" name="month" class="number month" id="dateofbirth_month" min="01" max="12" step="1" tabindex="3" required>
           Month</label>
         <label class="label_min label_year">
-          <input type="number" name="day" class="number day" id="dateofbirth_day"  placeholder="Day"  min="01" max="31" step="1" required>
+          <input type="number" name="day" class="number day" id="dateofbirth_day"  min="01" max="31" step="1" tabindex="4" required>
           Day</label>
         {% for error in form.errors.birthdate %}<span class="val_message">{{ error }}</span>{% endfor %}
       </div>
-      <a href="#" role="button" class="btn"><strong>Save</strong></a> <a href="#" class="btn_cancel">Cancel</a>
+      <a href="#" role="button" class="btn red_grad shadow_big"><strong>Save</strong></a>
     </form>
   </div>
 {% endblock content %}

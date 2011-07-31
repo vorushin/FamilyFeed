@@ -164,7 +164,9 @@ def save_facebook_source(request, username, child_slug):
 @require_POST
 def save_youtube_source(request, username, child_slug):
     child = get_object_or_404(Child, user__username=username, slug=child_slug)
-    usernames = request.POST['usernames']
-    keywords = request.POST['keywords']
+    youtube_source = child.youtube_source
+    youtube_source.usernames = request.POST['usernames']
+    youtube_source.keywords = request.POST['keywords']
+    youtube_source.save()
     return HttpResponseRedirect(reverse(edit_child,
                                         args=[username, child_slug]))

@@ -12,3 +12,5 @@ django-extensions>=0.5
 gdata==2.0.14
 
 git+git://github.com/facebook/python-sdk.git#facebook_python_sdk
+
+trans==1.3

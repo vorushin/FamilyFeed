@@ -140,6 +140,7 @@ INSTALLED_APPS = (
 SKIP_SOUTH_TESTS = True
 SOUTH_TESTS_MIGRATE = False
 
+LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = '/'
 
 # A sample logging configuration. The only tangible logging
