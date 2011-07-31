@@ -5,11 +5,16 @@ urlpatterns = patterns('profiles.views',
     url(r'^registration/$', 'registration'),
 
     url(r'^add_child/$', 'add_child'),
-    url(r'^(?P<username>[\w.@+-]+)/(?P<child_name>[\w.@+-]+)/edit$',
+    url(r'^(?P<username>[\w.@+-]+)/(?P<child_slug>[\w.@+-]+)/edit$',
          'edit_child'),
     url(r'^feeds/youtube$', 'youtube_feed'),
     url(r'^feeds/facebook$', 'facebook_feed'),
     url(r'^facebook/done/$', 'facebook_login_done'),
+
+    url(r'^^(?P<username>[\w.@+-]+)/(?P<child_slug>[\w.@+-]+)/add_fb/$',
+        'add_facebook_profile'),
+    url(r'^^(?P<username>[\w.@+-]+)/(?P<child_slug>[\w.@+-]+)/add_fb_done/$',
+        'add_facebook_profile_done'),
 )
 
 urlpatterns += patterns('',

@@ -4,6 +4,7 @@ from django import forms
 from django.contrib.auth.models import User
 
 from profiles.models import Child
+from utils import make_uri_title
 
 
 class RegistrationForm(forms.ModelForm):
@@ -48,7 +49,7 @@ class ChildForm(forms.ModelForm):
     def clean_name(self):
         name = self.cleaned_data['name']
         try:
-            Child.objects.get(user=self.user, name=name)
+            Child.objects.get(user=self.user, slug=make_uri_title(name))
         except Child.DoesNotExist:
             return name
         raise forms.ValidationError('A child with that name already exists.')
@@ -70,6 +71,7 @@ class ChildForm(forms.ModelForm):
     def save(self, commit=True):
         child = super(ChildForm, self).save(commit=False)
         child.user = self.user
+        child.slug = make_uri_title(child.name)
         if commit:
             child.save()
         return child

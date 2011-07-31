@@ -3,7 +3,19 @@
 {% load coffeescript %}
 
 {% block extrahead %}
-    <script src="{{ STATIC_URL }}{% coffeescript "js/edit_child.coffee" %}"></script>
+    <script>
+    {% inlinecoffeescript %}
+        $(document).ready ->
+            $('div.source_facebook a.add').click ->
+                window.open(
+                    '{% url profiles.views.add_facebook_profile child.user.username child.slug %}',
+                    'Adding facebook profile',
+                    'height=600,width=800,toolbar=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no')
+                return false
+
+            window.refresh_sources = -> window.location.reload()
+    {% endinlinecoffeescript %}
+    </script>
 {% endblock extrahead %}
 
 {% block content %}
@@ -18,6 +30,16 @@
     and other stuff about <em>{{ child.name }}</em></p>
   <div class="addsource_btns cf">
     <div class="source source_facebook shadow_big">
+        <a href="#" class="view"></a>
+        {% for source in child.facebook_sources %}
+            <div class="added_source cf">
+                <a href="#" class="view">
+                    <img src="{{ source.picture }}" alt="{{ source.name }}" title="{{ source.name }}"  class="pic" />
+                </a>
+                <a href="#" title="Delete source" class="delete shadow_small red_grad">×</a>
+            </div>
+        {% endfor %}
+
         {% comment %}
         <div class="added_source cf">
         <img src="http://a1.twimg.com/profile_images/1468944732/contactango_normal.jpeg" alt="Roman Vorushin"  class="pic" />
@@ -65,8 +87,6 @@
       </form>
       <a href="#" role="button" class="btn shadow_big red_grad"><strong>Save these sources</strong></a> <a href="#" class="btn_cancel">Cancel</a>
     </div>
-    {% endcomment %}
-    {% comment %}
     <div class="source_preview">
       <h3>Preview feed:</h3>
       <p class="suggest">You can remove some of the results, unless you want to add them to the feed</p>

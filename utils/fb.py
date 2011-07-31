@@ -1,5 +1,3 @@
-from __future__ import absolute_import
-
 import base64
 from cgi import parse_qs
 from functools import wraps
@@ -12,7 +10,8 @@ from django.contrib import messages
 from django.http import HttpResponseRedirect, HttpResponseBadRequest
 import facebook
 
-from utils import log_exception, absolute_uri
+from utils import absolute_uri, json, log_exception
+
 
 class FacebookError(Exception):
     pass
@@ -22,39 +21,40 @@ class BadRequestError(Exception):
     pass
 
 
-# def base64_url_decode(inp):
-#     padding_factor = (4 - len(inp) % 4) % 4
-#     inp += '=' * padding_factor
-#     return base64.b64decode(
-#         unicode(inp).translate(dict(zip(map(ord, u'-_'), u'+/'))))
+def base64_url_decode(inp):
+    padding_factor = (4 - len(inp) % 4) % 4
+    inp += '=' * padding_factor
+    return base64.b64decode(
+        unicode(inp).translate(dict(zip(map(ord, u'-_'), u'+/'))))
 
 
 # source - http://sunilarora.org/parsing-signedrequest-parameter-in-python-bas
-# def parse_signed_request(signed_request, secret):
-#     encoded_sig, payload = signed_request.split('.', 2)
+def parse_signed_request(signed_request, secret):
+    encoded_sig, payload = signed_request.split('.', 2)
 
-#     sig = base64_url_decode(encoded_sig)
-#     data = json.loads(base64_url_decode(payload))
+    sig = base64_url_decode(encoded_sig)
+    data = json.loads(base64_url_decode(payload))
 
-#     if data.get('algorithm').upper() != 'HMAC-SHA256':
-#         raise Exception('Unknown algorithm')
+    if data.get('algorithm').upper() != 'HMAC-SHA256':
+        raise Exception('Unknown algorithm')
 
-#     expected_sig = hmac.new(secret, msg=payload, digestmod=hashlib.sha256)\
-#         .digest()
-#     if sig != expected_sig:
-#         raise Exception('Signature error')
+    expected_sig = hmac.new(secret, msg=payload, digestmod=hashlib.sha256)\
+        .digest()
+    if sig != expected_sig:
+        raise Exception('Signature error')
 
-#     return data
+    return data
 
 
 def request_facebook_permissions(request, permissions, redirect_url):
     params = {
-        'client_id': settings.FACEBOOK_API_KEY,
-        'redirect_uri': settings.FACEBOOK_REDIRECT_URL,
+        'client_id': settings.FACEBOOK_APP_ID,
+        'redirect_uri': absolute_uri(redirect_url, request),
         'scope': ','.join(permissions),
     }
     return HttpResponseRedirect('https://graph.facebook.com/oauth/authorize?' +
                                 urlencode(params))
+
 
 def get_facebook_access_token(request):
     if 'error' in request.GET:
@@ -64,7 +64,6 @@ def get_facebook_access_token(request):
                    'error_reason': request.GET.get('error_reason'),
                    'error_description': request.GET.get('error_description')})
         raise FacebookError(request.GET['error'])
-
     if not 'code' in request.GET:
         raise BadRequestError
 
@@ -73,17 +72,23 @@ def get_facebook_access_token(request):
         raise Exception
 
     params = {
-        'client_id': settings.FACEBOOK_API_KEY,
+        'client_id': settings.FACEBOOK_APP_ID,
         'client_secret': settings.FACEBOOK_SECRET_KEY,
-        'redirect_uri': settings.FACEBOOK_REDIRECT_URL,
-        # 'redirect_uri': absolute_uri(request.path, request),
+        'redirect_uri': absolute_uri(request.path, request),
         'code': code,
     }
     response = urlopen('https://graph.facebook.com/oauth/access_token?'
                        + urlencode(params)).read()
-    if response.find(error) != -1:
-        raise FacebookError(response)
+
     return parse_qs(response)['access_token'][-1]
+
+
+def put_wall_post(access_token, post):
+    api = facebook.GraphAPI(access_token)
+    try:
+        api.put_wall_post(post.encode('utf-8'))
+    except facebook.GraphAPIError:
+        log_exception('GraphAPIError in put_wall_post()')
 
 
 def facebook_callback(func):
