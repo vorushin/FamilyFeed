@@ -20,3 +20,7 @@ def absolute_uri(location, request=None):
 def make_uri_title(value):
     import trans
     return value.encode('trans/slug')
+
+
+def comma_split(keywords):
+    return [k.strip() for k in keywords.split(',')]

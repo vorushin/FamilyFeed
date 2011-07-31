@@ -81,7 +81,7 @@
                 <a href="#" class="view">
                     <img src="{{ source.picture }}" alt="{{ source.name }}" title="{{ source.name }}"  class="pic" />
                 </a>
-                <a href="#" title="Delete source" class="delete shadow_small red_grad">×</a>
+                {#<a href="#" title="Delete source" class="delete shadow_small red_grad">×</a>#}
             </div>
         {% endfor %}
         <a href="#" class="add green_grad shadow_big" title="Add source">+</a>
@@ -89,20 +89,14 @@
 
     <div class="source source_youtube shadow_big">
         <a href="#" class="view"></a>
-        {% for source in child.youtube_sources %}
+        {% for account in child.youtube_accounts %}
             <div class="added_source cf">
                 <a href="#" class="view">
-                    <img src="{{ source.picture }}" alt="{{ source.name }}" title="{{ source.name }}"  class="pic" />
+                    <img src="{{ account.picture }}" alt="{{ account.username }}" title="{{ account.username }}"  class="pic" />
                 </a>
-                <a href="#" title="Delete source" class="delete shadow_small red_grad">×</a>
+                {#<a href="#" title="Delete source" class="delete shadow_small red_grad">×</a>#}
             </div>
         {% endfor %}
-        {% comment %}
-        <div class="added_source cf">
-        <img src="http://a1.twimg.com/profile_images/1468944732/contactango_normal.jpeg" alt="Roman Vorushin"  class="pic" />
-        <a href="#" title="Delete source" class="delete shadow_small red_grad">×</a>
-        </div>
-        {% endcomment %}
         <a href="#" class="add green_grad shadow_big" title="Add source">+</a>
     </div>
   </div>
