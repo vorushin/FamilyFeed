@@ -15,7 +15,7 @@ function createTimeline(events) {
         Timeline.createBandInfo({
             eventSource:    eventSource,
             width:          "90%",
-            intervalUnit:   Timeline.DateTime.MONTH,
+            intervalUnit:   Timeline.DateTime.WEEK,
             intervalPixels: 100,
             showEventText: false,
             eventPainter:   Timeline.CompactEventPainter,
@@ -37,8 +37,9 @@ function createTimeline(events) {
         }),
         Timeline.createBandInfo({
             width:          "10%",
-            intervalUnit:   Timeline.DateTime.YEAR,
-            intervalPixels: 200
+            intervalUnit:   Timeline.DateTime.MONTH,
+            intervalPixels: 200,
+            layout: 'overview'
         })
     ];
     bandInfos[1].syncWith = 0;
