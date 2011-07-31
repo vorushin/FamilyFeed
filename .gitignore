@@ -2,12 +2,5 @@
 .Python
 env
 *.pyc
-wiktionary_data/*
-wiktionary.tar.gz
 local_settings.py
-*.log
-e.html
-oanc/
-*.pickle
-*.json
 static/coffee/

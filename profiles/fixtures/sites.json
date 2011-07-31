@@ -1,0 +1,1 @@
+[{"pk": 2, "model": "sites.site", "fields": {"domain": "familyfeed.hydra.sciworth.com", "name": "familyfeed.hydra.sciworth.com"}}, {"pk": 1, "model": "sites.site", "fields": {"domain": "familyfeed.vorushin.ru", "name": "familyfeed.vorushin.ru"}}, {"pk": 3, "model": "sites.site", "fields": {"domain": "l.familyfeed.vorushin.ru", "name": "l.familyfeed.vorushin.ru"}}]
