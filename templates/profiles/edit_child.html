@@ -6,6 +6,12 @@
     <script>
     {% inlinecoffeescript %}
         $(document).ready ->
+            $('div.source_facebook a.view').click ->
+                $('div.add_twitter').hide()
+                $('div.add_youtube').hide()
+                $('div.add_facebook').show()
+                return false
+
             $('div.source_facebook a.add').click ->
                 window.open(
                     '{% url profiles.views.add_facebook_profile child.user.username child.slug %}',
@@ -15,12 +21,11 @@
 
             window.refresh_sources = -> window.location.reload()
 
-            $('#facebook_searchfor').change ->
+            $('div.add_facebook a.preview').click ->
                 $.get('{% url profiles.views.get_facebook_data_ajax child.user.username child.slug %}',
                       {'keywords': $('#facebook_searchfor').val()},
-                      (data) -> $('div.source_preview').html(data))
-
-
+                      (data) -> $('div.add_facebook div.source_preview').html(data))
+                return false
     {% endinlinecoffeescript %}
     </script>
 {% endblock extrahead %}
@@ -46,17 +51,6 @@
                 <a href="#" title="Delete source" class="delete shadow_small red_grad">×</a>
             </div>
         {% endfor %}
-
-        {% comment %}
-        <div class="added_source cf">
-        <img src="http://a1.twimg.com/profile_images/1468944732/contactango_normal.jpeg" alt="Roman Vorushin"  class="pic" />
-        <a href="#" title="Delete source" class="delete shadow_small red_grad">×</a>
-        </div>
-         <div class="added_source cf">
-        <img src="http://www.weblancer.net/files/portfolio/632/63207/userpic_s.jpg" alt="Roman Vorushin"  class="pic" />
-        <a href="#" title="Delete source" class="delete shadow_small red_grad">×</a>
-        </div>
-        {% endcomment %}
         <a href="#" class="add green_grad shadow_big" title="Add source">+</a>
     </div>
 
@@ -81,7 +75,7 @@
     </div>
   </div>
 
-  <div class="addsource add_facebook cf">
+  <div class="addsource add_facebook cf" style="display: none;">
     <div class="source_form">
       <form action="#" сlass="cf">
         <label>Facebook profiles:</label>
@@ -92,17 +86,16 @@
         <label for="facebook_searchfor">Search for:</label>
         <span class="suggest">You can add a few words separated by commas</span>
         <input type="text" class="text" id="facebook_searchfor" value="{{ child.name }}, ">
+        <a href="#" role="button" class="preview"><strong>Preview&nbsp;&rarr;</strong></a>
       </form>
       <a href="#" role="button" class="btn shadow_big red_grad"><strong>Save these sources</strong></a> <a href="#" class="btn_cancel">Cancel</a>
     </div>
+
+    <div class="source_preview">
+    </div>
   </div>
 
-  <div class="addsource add_twitter cf">
-  </div>
-
-  <div class="addsource add_youtube cf">
-  </div>
-    {% comment %}
+  <div class="addsource add_twitter cf" style="display: none;">
     <div class="source_form">
       <form action="#" сlass="cf">
         <label for="twitter_accounts">Twitter usernames</label>
@@ -114,8 +107,12 @@
       </form>
       <a href="#" role="button" class="btn shadow_big red_grad"><strong>Save these sources</strong></a> <a href="#" class="btn_cancel">Cancel</a>
     </div>
-    {% endcomment %}
+
     <div class="source_preview">
     </div>
+  </div>
+
+  <div class="addsource add_youtube cf" style="display: none;">
+  </div>
   </div>
 {% endblock content %}
