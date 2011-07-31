@@ -1,11 +1,14 @@
 function createTimeline(events, eventInterval, scaleInterval) {
     Timeline.CompactEventPainter.prototype._showBubble = function(x, y, events) {
-        var url = events[0].getProperty("url");
+        var videoUrl = events[0].getProperty("videoUrl");
+        if (videoUrl == undefined) {
+            return;
+        }
         $.fancybox({
             'titleShow'        : false,
             'transitionIn'     : 'elastic',
             'transitionOut'    : 'elastic',
-            'href'             : url + "&fs=1&autoplay=1",
+            'href'             : videoUrl + "&fs=1&autoplay=1",
             'type'             : 'swf',
             'swf'              : { 'wmode' : 'transparent' }
         });

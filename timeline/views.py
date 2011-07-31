@@ -33,7 +33,7 @@ class YouTubeEvent(object):
         self.title = video.title
         self.caption = video.title
         self.icon = video.thumbnails[1].url
-        self.url = video.url
+        self.videoUrl = video.url
         self.classname = 'video-label'
         self.iconClassName = 'video-event'
         # self.classname = 'picture-label'
