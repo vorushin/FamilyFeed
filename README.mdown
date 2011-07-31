@@ -1,0 +1,15 @@
+# About FamilyFeed
+
+FamilyFeed is a DjangoDash 2011 project. The project idea belongs to Yana Vorushina, one of our programmer's wife.
+
+You can create account for your kid, and add data sources (currently facebook and youtube).
+We will scan these sources using keywords you provided and show everything we
+found on a timeline.
+
+# Team
+
+* [Igor Sklyarevsky](skliarevsky.org), designer
+* [Matvey Maslov](http://twitter.com/matveym), programmer
+* [Roman Vorushin](http://vorushin.ru), programmer
+
+We are working together at [grammarly.com](http://grammarly.com) cozy office.
