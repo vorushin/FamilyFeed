@@ -48,7 +48,8 @@ class FacebookEvent(object):
         self.message = post['message']
         if post.get('picture'):
             self.icon = post['picture']
-            # self.classname = 'picture-label'
+        self.classname = 'facebook-label'
+        self.iconClassName = 'facebook-icon'
 
 
 def start(request):
