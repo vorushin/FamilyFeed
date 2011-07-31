@@ -2,12 +2,20 @@ import urllib2
 import json
 
 
-def list_posts(username, access_token):
-    return json.loads(_fetch_posts(username, access_token))
+def list_posts(username, access_token, keywords=[]):
+    graph_url = 'https://graph.facebook.com/me/feed?access_token=%s' % \
+        access_token
+    keywords = split_keywords(keywords)
+    items = []
 
+    resp = json.loads(urlopen(graph_url).read())
+    while resp['data']:
+        for item in resp['data']:
+            text = item.get('message', u'') + item.get('description', u'')
+            for keyword in keywords:
+                if text.find(keyword) != -1:
+                    items.append(item)
+                    break
+        resp = json.loads(urlopen(resp['paging']['next']).read())
 
-def _fetch_posts(username, access_token):
-    url = 'https://graph.facebook.com/%s/posts?access_token=%s' % \
-        (username, access_token)
-    response = urllib2.urlopen(url)
-    return response.read()
+    return items
