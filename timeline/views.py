@@ -46,8 +46,10 @@ class FacebookEvent(object):
     def __init__(self, post):
         self.type = 'facebook'
         self.start = event_date(datetime.datetime.strptime(post['created_time'], '%Y-%m-%dT%H:%M:%S+0000'))
-        self.title = shorten(post['message'])
-        self.message = post['message']
+        self.message = post.get('message', '')
+        if post.get('description'):
+            self.description = post['description']
+        self.title = shorten(self.message or self.description)
         if post.get('link'):
             self.url = post['link']
         if post.get('picture'):
