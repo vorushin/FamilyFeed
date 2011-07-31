@@ -25,7 +25,7 @@
 <div id="container">
   <header>
     <div class="inner">
-      <div class="logo">familyfeed</div>
+      <a href="{% url timeline.views.start %}"><div class="logo">familyfeed</div></a>
       <div class="login">
         {% if user.is_authenticated %}
           Welcome, <strong>{{ user.username }}</strong>. <a href="{% url logout %}">Log out</a>&nbsp;&rarr;
