@@ -14,7 +14,7 @@ from profiles.forms import ChildForm, RegistrationForm
 from profiles.models import Child, FacebookSource
 from sources import youtube, facebook
 
-from timeline.views import keywords_present, YouTubeEvent
+from timeline.views import keywords_present, FacebookEvent, YouTubeEvent
 from utils.json import ObjectEncoder
 from utils.fb import facebook_callback, request_facebook_permissions
 
@@ -127,7 +127,10 @@ def get_facebook_data_ajax(request, username, child_slug):
         for item in _facebook_feed_items(source.access_token, keywords):
             data.append(item)
 
-    return render(request, 'profiles/facebook_data.html', {'data': data})
+    facebook_events = [FacebookEvent(item) for item in data]
+    return render(request,
+                  'profiles/facebook_data.html',
+                  {'facebook_events': facebook_events})
 
 
 def get_youtube_data_ajax(request, username, child_slug):

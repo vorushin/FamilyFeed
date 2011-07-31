@@ -21,16 +21,17 @@
             window.refresh_sources = -> window.location.reload()
 
             $('div.add_facebook a.preview').click ->
-                $.get('{% url profiles.views.get_facebook_data_ajax child.user.username child.slug %}',
+                $('div.loading').show()
+                $.get '{% url profiles.views.get_facebook_data_ajax child.user.username child.slug %}',
                       {'keywords': $('#facebook_searchfor').val()},
-                      (data) -> $('div.add_facebook div.source_preview').html(data))
+                      (data) ->
+                        $('div.loading').hide()
+                        $('div.add_facebook div.source_preview').html(data)
                 return false
 
             $('div.add_facebook a.save').click ->
                 $('div.add_facebook form').submit()
                 return false
-
-
 
             show_youtube = ->
                 $('div.add_facebook').hide()
@@ -43,9 +44,12 @@
                 $('div.add_youtube input[name=usernames]').focus()
 
             $('div.add_youtube a.preview').click ->
-                $.get('{% url profiles.views.get_youtube_data_ajax child.user.username child.slug %}',
+                $('div.loading').show()
+                $.get '{% url profiles.views.get_youtube_data_ajax child.user.username child.slug %}',
                       {'keywords': $('#youtube_searchfor').val()},
-                      (data) -> $('div.add_youtube div.source_preview').html(data))
+                      (data) ->
+                        $('div.loading').hide()
+                        $('div.add_youtube div.source_preview').html(data)
                 return false
 
             $('div.add_youtube a.save').click ->
@@ -122,7 +126,7 @@
       <a href="#" class="btn_cancel">Cancel</a>
     </div>
 
-    <div class="loading">
+    <div class="loading" style="display: none;">
         Loading
     </div>
     <div class="source_preview">
@@ -147,7 +151,7 @@
       <a href="#" class="btn_cancel">Cancel</a>
     </div>
 
-    <div class="loading">
+    <div class="loading" style="display: none;">
         Loading
     </div>
     <div class="source_preview">

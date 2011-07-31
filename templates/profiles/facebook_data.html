@@ -1,12 +1,10 @@
-<h3>Preview feed:</h3>
-<p class="suggest">You can remove some of the results, unless you want to add them to the feed</p>
-{% for post in data %}
+<h3>Preview</h3>
+{% for event in facebook_events %}
     <div class="post tweet">
-        {% if post.picture %}<img src="{{ post.picture }}" class="pic" />{% endif %}
+        {% if event.picture %}<img src="{{ event.picture }}" class="pic" />{% endif %}
         <div class="post_info">
-            <span class="post_date">{{ post.created_time }}</span> {#— <span class="post_age"><em>Martha</em> was 1 year 3 month old</span>#}
+            <span class="post_date">{{ event.start }}</span>
         </div>
-        <div class="tweet_text">{{ post.message }} "{{ post.description }}"</div>
-        {#<a href="#" class="post_delete red_grad shadow_small">×</a>#}
+        <div class="tweet_text">{{ event.message }}{% if event.description %} "{{ event.description }}"{% endif %}</div>
     </div>
 {% endfor %}
