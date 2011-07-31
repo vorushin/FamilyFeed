@@ -331,3 +331,13 @@ background: url(../img/edit.png) 50% 50% no-repeat, linear-gradient(top, #339900
 .action_btns {position:absolute; z-index:999; margin:0 auto; width:100%; text-align:center; top:500px;}
 .action_btns .sep {padding: 0 20px; font: bold 16px/60px museo-sans, sans-serif; font-weight:500; color:#fff;}
 .action_btns a.btn {height: 60px; border-radius:60px; font: bold 30px/60px museo-sans, sans-serif; font-weight:900; padding: 0 30px; border:none;}
+
+
+
+.timeline-event-label  {
+    padding:10px 10px 10px 24px;
+    background: rgba(255,255,255,0.7);
+    width:auto !important;
+}
+
+.facebook-label {background: rgba(255,255,255,0.7);}
