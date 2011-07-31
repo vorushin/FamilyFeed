@@ -441,10 +441,10 @@ Timeline.CompactEventPainter.prototype.paintStackedPreciseInstantEvents = functi
         var record = records[index];
         var evt = events[index];
         var tooltip = evt.getProperty("tooltip") || evt.getText();
-        
+
         var labelElmtData = self._paintEventLabel(
-            { tooltip: tooltip },
-            { text: record.text },
+            { tooltip: tooltip},
+            { text: record.text, className: evt.getProperty("classname")  },
             anchorPixel + record.labelLeft,
             verticalPixelOffset + record.top,
             record.labelSize.width, 
@@ -484,11 +484,11 @@ Timeline.CompactEventPainter.prototype.paintStackedPreciseInstantEvents = functi
     for (var i = 0; i < records.length; i++) {
         paintEvent(i);
     }
-    
+
     if (showMoreMessage) {
         var moreEvents = events.slice(limit);
         var moreMessageLabelElmtData = this._paintEventLabel(
-            { tooltip: moreMessage },
+            { tooltip: moreMessage, className: evt.getProperty('classname') },
             { text: moreMessage },
             anchorPixel + moreMessageLabelLeft,
             verticalPixelOffset + moreMessageLabelTop,
@@ -884,7 +884,7 @@ Timeline.CompactEventPainter.prototype._paintEventIcon = function(evt, commonDat
 
 Timeline.CompactEventPainter.prototype._paintEventLabel = function(commonData, labelData, left, top, width, height, theme) {
     var doc = this._timeline.getDocument();
-    
+
     var labelDiv = doc.createElement("div");
     labelDiv.className = 'timeline-event-label';
 

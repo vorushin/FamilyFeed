@@ -341,3 +341,4 @@ background: url(../img/edit.png) 50% 50% no-repeat, linear-gradient(top, #339900
 }
 
 .facebook-label {background: rgba(255,255,255,0.7) url(../img/fb_min.png) 10px 50% no-repeat; padding-left:30px;}
+.video-label {background: rgba(255,255,255,0.7) url(../img/yt_min.png) 10px 50% no-repeat; padding-left:30px;}
