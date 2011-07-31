@@ -1,7 +1,10 @@
 function createTimeline(events, eventInterval, scaleInterval) {
     Timeline.CompactEventPainter.prototype._showBubble = function(x, y, events) {
-        var videoUrl = events[0].getProperty("videoUrl");
-        if (videoUrl != undefined) {
+        var event = events[0];
+        var type = event.getProperty('type');
+        switch (type) {
+            case 'youtube':
+            var videoUrl = event.getProperty("videoUrl");
             $.fancybox({
                 'titleShow'        : false,
                 'transitionIn'     : 'elastic',
@@ -10,14 +13,22 @@ function createTimeline(events, eventInterval, scaleInterval) {
                 'type'             : 'swf',
                 'swf'              : { 'wmode' : 'transparent' }
             });
-        } else {
+            break;
+
+            case 'facebook':
+            var message = event.getProperty("message");
             $.fancybox({
                 'titleShow'        : false,
                 'transitionIn'     : 'elastic',
                 'transitionOut'    : 'elastic',
-                'content'          : "This is a long text for Igor. Please style it nice. Thanks! :)"
+                'content'          : message
             });
+            break;
+            
         }
+        // if (type == undefined) {
+        // } else {
+        // }
     };
     var now = new Date();
     var fewMonthsAgo = new Date(now.getTime() - 2 * 30 * 24 * 60 * 60 * 1000);
