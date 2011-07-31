@@ -7,7 +7,6 @@
     {% inlinecoffeescript %}
         $(document).ready ->
             $('div.source_facebook a.view').click ->
-                $('div.add_twitter').hide()
                 $('div.add_youtube').hide()
                 $('div.add_facebook').show()
                 return false
@@ -35,7 +34,6 @@
 
             show_youtube = ->
                 $('div.add_facebook').hide()
-                $('div.add_twitter').hide()
                 $('div.add_youtube').show()
                 return false
 
@@ -55,7 +53,6 @@
                 return false
 
             $('a.btn_cancel').click ->
-                $('div.add_twitter').hide()
                 $('div.add_youtube').hide()
                 $('div.add_facebook').hide()
     {% endinlinecoffeescript %}
@@ -83,16 +80,6 @@
                 <a href="#" title="Delete source" class="delete shadow_small red_grad">×</a>
             </div>
         {% endfor %}
-        <a href="#" class="add green_grad shadow_big" title="Add source">+</a>
-    </div>
-
-    <div class="source source_twitter shadow_big">
-        {% comment %}
-        <div class="added_source cf">
-        <img src="http://a1.twimg.com/profile_images/1468944732/contactango_normal.jpeg" alt="Roman Vorushin"  class="pic" />
-        <a href="#" title="Delete source" class="delete shadow_small red_grad">×</a>
-        </div>
-        {% endcomment %}
         <a href="#" class="add green_grad shadow_big" title="Add source">+</a>
     </div>
 
@@ -142,29 +129,12 @@
     </div>
   </div>
 
-  <div class="addsource add_twitter cf" style="display: none;">
-    <div class="source_form">
-      <form action="#" сlass="cf">
-        <label for="twitter_accounts">Twitter usernames</label>
-        <span class="suggest">You can add a few usernames separated by commas (for example your's and your spouse's)</span>
-        <input type="text" class="text" id="twitter_accounts" placeholder="@" >
-        <label for="twitter_searchfor">Search for:</label>
-        <span class="suggest">You can add a few words separated by commas</span>
-        <input type="text" class="text" id="twitter_searchfor" value="Martha">
-      </form>
-      <a href="#" role="button" class="btn shadow_big red_grad"><strong>Save these sources</strong></a> <a href="#" class="btn_cancel">Cancel</a>
-    </div>
-
-    <div class="source_preview">
-    </div>
-  </div>
-
   <div class="addsource add_youtube cf" style="display: none;">
     <div class="source_form">
       <form method="POST" action="{% url profiles.views.save_youtube_source child.user.username child.slug %}" сlass="cf">
         {% csrf_token %}
 
-        <label for="twitter_accounts">Youtube usernames</label>
+        <label for="youtube_usernames">Youtube usernames</label>
         <span class="suggest">Add a few youtube usernames separated by commas</span>
         <input type="text" name="usernames" value="{{ child.youtube_source.usernames|default:"" }}" class="text" id="youtube_usernames" placeholder="" >
 
