@@ -1,8 +1,78 @@
 {% extends 'base.html' %}
 
+{% load coffeescript %}
+
 {% block extrahead %}
     <script src="{{ STATIC_URL }}{% coffeescript "js/edit_child.coffee" %}"></script>
 {% endblock extrahead %}
 
 {% block content %}
+  <div class="register step2 cf">
+    <p class="form_message shadow_big"><strong>Nice to meet with Marta!</strong></p>
+    <div class="child_saved cf">
+      <div class="inlineedit name"><a href="" class="edit dotted" title="Click to edit">Marta<span class="inline_label">name</span></a></div>
+      <div class="inlineedit date"><a href="" class="edit dotted" title="Click to edit">2010-09-22<span class="inline_label">date of birth</span></a></div>
+    </div>
+  </div>
+  <h2>Add sources</h2>
+  <p>Now let's add a few resources that contain photos, videos
+    and other stuff about <em>Marta</em></p>
+  <div class="addsource_btns cf">
+    <div class="source source_facebook shadow_big">
+        <div class="added_source cf">
+        <img src="http://a1.twimg.com/profile_images/1468944732/contactango_normal.jpeg" alt="Roman Vorushin"  class="pic" />
+        <a href="#" title="Delete source" class="delete shadow_small red_grad">×</a>
+        </div>
+         <div class="added_source cf">
+        <img src="http://www.weblancer.net/files/portfolio/632/63207/userpic_s.jpg" alt="Roman Vorushin"  class="pic" />
+        <a href="#" title="Delete source" class="delete shadow_small red_grad">×</a>
+        </div>
+        <a href="#" class="add green_grad shadow_big" title="Add source">+</a>
+    </div>
+
+    <div class="source source_twitter shadow_big">
+        <div class="added_source cf">
+        <img src="http://a1.twimg.com/profile_images/1468944732/contactango_normal.jpeg" alt="Roman Vorushin"  class="pic" />
+        <a href="#" title="Delete source" class="delete shadow_small red_grad">×</a>
+        </div>
+        <a href="#" class="add green_grad shadow_big" title="Add source">+</a>
+    </div>
+
+    <div class="source source_youtube shadow_big">
+        <div class="added_source cf">
+        <img src="http://a1.twimg.com/profile_images/1468944732/contactango_normal.jpeg" alt="Roman Vorushin"  class="pic" />
+        <a href="#" title="Delete source" class="delete shadow_small red_grad">×</a>
+        </div>
+        <a href="#" class="add green_grad shadow_big" title="Add source">+</a>
+    </div>
+  </div>
+
+  <div class="addsource add_twitter cf">
+    <div class="source_form">
+      <form action="#" сlass="cf">
+        <label for="twitter_accounts">Twitter usernames</label>
+        <span class="suggest">You can add a few usernames separated by commas (for example your's and your spouse's)</span>
+        <input type="text" class="text" id="twitter_accounts" placeholder="@" >
+        <label for="twitter_searchfor">Search for:</label>
+        <span class="suggest">You can add a few words separated by commas</span>
+        <input type="text" class="text" id="twitter_searchfor" value="Martha">
+      </form>
+      <a href="#" role="button" class="btn shadow_big red_grad"><strong>Save these sources</strong></a> <a href="#" class="btn_cancel">Cancel</a> </div>
+    <div class="source_preview">
+      <h3>Preview feed:</h3>
+      <p class="suggest">You can remove some of the results, unless you want to add them to the feed</p>
+      <div class="post tweet"> <img src="http://a1.twimg.com/profile_images/1468944732/contactango_normal.jpeg" alt="Roman Vorushin"  class="pic" />
+        <div class="post_info"><span class="post_date">12 MAR 2011</span> — <span class="post_age"><em>Martha</em> was 1 year 3 month old</span></div>
+        <div class="tweet_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nunc tortor, imperdiet vel tincidunt ac, interdum sit amet justo</div>
+        <a href="#" class="post_delete red_grad shadow_small">×</a> </div>
+      <div class="post tweet"> <img src="http://a1.twimg.com/profile_images/1468944732/contactango_normal.jpeg" alt="Roman Vorushin"  class="pic" />
+        <div class="post_info"><span class="post_date">12 MAR 2011</span> — <span class="post_age"><em>Martha</em> was 1 year 3 month old</span></div>
+        <div class="tweet_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nunc tortor, imperdiet vel tincidunt ac, interdum sit amet justo</div>
+        <a href="#" class="post_delete red_grad shadow_small">×</a> </div>
+      <div class="post tweet"> <img src="http://a1.twimg.com/profile_images/1468944732/contactango_normal.jpeg" alt="Roman Vorushin"  class="pic" />
+        <div class="post_info"><span class="post_date">12 MAR 2011</span> — <span class="post_age"><em>Martha</em> was 1 year 3 month old</span></div>
+        <div class="tweet_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nunc tortor, imperdiet vel tincidunt ac, interdum sit amet justo</div>
+        <a href="#" class="post_delete red_grad shadow_small">×</a> </div>
+    </div>
+  </div>
 {% endblock content %}

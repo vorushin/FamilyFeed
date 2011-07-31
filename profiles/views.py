@@ -1,26 +1,19 @@
 import json
 
 from django.contrib.auth import authenticate, login as auth_login
+from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect, HttpResponse
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 
 from profiles.forms import ChildForm, RegistrationForm
+from profiles.models import Child
 from sources import youtube, facebook
-from utils import make_uri_title
-from utils.fb import facebook_callback
 
+from utils import make_uri_title
 from utils.json import ObjectEncoder
 from utils.fb import facebook_callback
-
-
-class ObjectEncoder(json.JSONEncoder):
-    def default(self, obj):
-        if hasattr(obj, '__json__'):
-            return obj.__json__()
-        return dict((k, v) for k, v in obj.__dict__.items()
-                           if not k.startswith("_"))
 
 
 def start(request):
@@ -47,8 +40,9 @@ def add_child(request):
         form = ChildForm(request.POST, user=request.user)
         if form.is_valid():
             child = form.save()
-            url = reverse('profiles.views.edit_child',
-                          args=[make_uri_title(child.name)])
+            url = reverse(
+                'profiles.views.edit_child',
+                args=[request.user.username, make_uri_title(child.name)])
             return HttpResponseRedirect(url)
     else:
         form = ChildForm()
@@ -56,6 +50,13 @@ def add_child(request):
                   'profiles/add_child.html',
                   {'is_add': True,
                    'form': form})
+
+
+@login_required
+def edit_child(request, username, child_name):
+    user = get_object_or_404(User, username=username)
+    child = get_object_or_404(Child, user=user, name=child_name)
+    return render(request, 'profiles/edit_child.html', {'child': child})
 
 
 def youtube_feed(request):
