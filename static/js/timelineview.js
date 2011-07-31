@@ -28,12 +28,12 @@ function createTimeline(events, eventInterval, scaleInterval) {
                 });
                 
             } else {
-                var message = event.getProperty("message");
+                var text = event.getProperty("text");
                 $.fancybox({
                     'titleShow'        : false,
                     'transitionIn'     : 'elastic',
                     'transitionOut'    : 'elastic',
-                    'content'          : message
+                    'content'          : text
                 });
             }
             break;

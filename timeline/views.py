@@ -47,8 +47,16 @@ class FacebookEvent(object):
         self.type = 'facebook'
         self.start = event_date(datetime.datetime.strptime(post['created_time'], '%Y-%m-%dT%H:%M:%S+0000'))
         self.message = post.get('message', '')
+
+        self.description = None
         if post.get('description'):
             self.description = post['description']
+
+        self.text = self.message
+        if self.description:
+            self.text += ' "%s"' % self.description
+
+        
         self.title = shorten(self.message or self.description)
         if post.get('link'):
             self.url = post['link']
@@ -97,7 +105,6 @@ def timeline(request, username, child_slug):
     children = Child.objects.filter(user__username__exact=username)
     facebook_events = []
     for facebook_source in child.facebook_sources.all():
-        # facebook_events.extend(keywords_present(facebook.list_posts(facebook_source.access_token, first_5=True), [u'Март'], facebook.post_text))
         facebook_events.extend(keywords_present(facebook.list_posts(facebook_source.access_token, first_5=True), list_keywords(facebook_source.keywords), facebook.post_text))
 
     youtube_events = keywords_present(youtube.list_videos('vorushin'), [], lambda video: video.title)
