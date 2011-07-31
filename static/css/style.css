@@ -263,7 +263,7 @@ position: absolute !important;
 top: 160px;
 width: 100%;}
 
-.timeline-event-label {display:none;}
+.timeline-event-label {}
 .timeline-date-label, .timeline-band-layer-inner {font: normal 20px/20px "Museo Sans 500", museo-sans-n5, museo-sans, sans-serif; color:#369 !important;}
 .timeline-date-label {font-size:13px; line-height:20px; height:30px !important;}
 .timeline-band-1 .timeline-date-label {font-size:20px; line-height:20px;}
