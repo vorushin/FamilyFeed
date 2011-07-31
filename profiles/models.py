@@ -46,4 +46,4 @@ class FacebookSource(models.Model):
     @property
     def picture(self):
         return 'https://graph.facebook.com/%s/picture' % self.uid
-        
+
