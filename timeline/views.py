@@ -22,7 +22,7 @@ class YouTubeEvent(object):
         self.caption = video.title
         self.icon = video.thumbnails[1].url
         self.url = video.url
-        self.classname = 'video-event'
+        self.classname = 'video-label'
 
 class FacebookEvent(object):
 
