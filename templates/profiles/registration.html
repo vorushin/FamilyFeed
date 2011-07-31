@@ -19,7 +19,7 @@
       {% for error in form.errors.username %}<span class="val_message">{{ error }}</span>{% endfor %}
 
       <label for="pass">Set password</label>
-      <input name="open_password" type="text" class="text initially_hidden" id="pass" tabindex="2" required>
+      <input name="open_password" type="text" class="text" style="display: none;" id="pass" tabindex="2" required>
       <input name="password" type="password" value="{{ form.data.password }}" class="text" id="pass" tabindex="2" required>
       {% for error in form.errors.password %}<span class="val_message">{{ error }}</span>{% endfor %}
       <input name="showpass" type="checkbox" value="">Show password</input>
