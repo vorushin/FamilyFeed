@@ -48,7 +48,7 @@ pre { padding: 15px; white-space: pre; white-space: pre-wrap; white-space: pre-l
 
 input {display:block;}
 input[type="radio"] { vertical-align: text-bottom; }
-input[type="checkbox"] { vertical-align: bottom; *vertical-align: baseline; }
+input[type="checkbox"] { vertical-align: bottom; *vertical-align: baseline; display:inline;}
 label, input[type=button], input[type=submit], button { cursor: pointer; }
 
 ::-moz-selection{ background: #FF5E99; color:#fff; text-shadow: none; }
