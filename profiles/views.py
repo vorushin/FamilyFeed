@@ -5,6 +5,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login as auth_login
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
+from django.core.exceptions import PermissionDenied
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import get_object_or_404, render
@@ -64,6 +65,8 @@ def add_child(request):
 @login_required
 def edit_child(request, username, child_slug):
     user = get_object_or_404(User, username=username)
+    if user != request.user:
+        raise PermissionDenied
     child = get_object_or_404(Child, user=user, slug=child_slug)
     return render(request, 'profiles/edit_child.html', {'child': child})
 
