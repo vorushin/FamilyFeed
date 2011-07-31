@@ -10,3 +10,4 @@ e.html
 oanc/
 *.pickle
 *.json
+static/coffee/
