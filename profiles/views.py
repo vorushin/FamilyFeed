@@ -120,10 +120,9 @@ def add_facebook_profile_done(request, access_token, username, child_slug):
 
 def get_facebook_data_ajax(request, username, child_slug):
     child = get_object_or_404(Child, user__username=username, slug=child_slug)
-    #keywords = unquote(str(request.GET['keywords'])).decode('utf-8')
     keywords = request.GET['keywords']
     data = []
-    for source in child.facebook_sources:
+    for source in child.facebook_sources.all():
         for item in _facebook_feed_items(source.access_token, keywords):
             data.append(item)
 
@@ -158,5 +157,14 @@ def save_facebook_source(request, username, child_slug):
     child = get_object_or_404(Child, user__username=username, slug=child_slug)
     keywords = request.POST['keywords']
     FacebookSource.objects.filter(child=child).update(keywords=keywords)
+    return HttpResponseRedirect(reverse(edit_child,
+                                        args=[username, child_slug]))
+
+
+@require_POST
+def save_youtube_source(request, username, child_slug):
+    child = get_object_or_404(Child, user__username=username, slug=child_slug)
+    usernames = request.POST['usernames']
+    keywords = request.POST['keywords']
     return HttpResponseRedirect(reverse(edit_child,
                                         args=[username, child_slug]))

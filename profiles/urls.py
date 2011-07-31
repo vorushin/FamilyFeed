@@ -21,6 +21,8 @@ urlpatterns = patterns('profiles.views',
 
     url(r'^(?P<username>[\w.@+-]+)/(?P<child_slug>[\w.@+-]+)/edit/safe_fb/$',
          'save_facebook_source'),
+    url(r'^(?P<username>[\w.@+-]+)/(?P<child_slug>[\w.@+-]+)/edit/safe_yt/$',
+         'save_youtube_source'),
 )
 
 urlpatterns += patterns('',

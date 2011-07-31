@@ -13,11 +13,21 @@ $(document).ready(function() {
 {% block content %}
   <div class="login">
     <h1>Log in</h1>
+    <div class="source_form login">
     <form method="POST" action=".">
       {% csrf_token %}
-      {{ form.as_p }}
 
-      <a href="#" role="button" class="btn"><strong>Log in</strong></a>
+      {{ form.non_field_errors }}
+
+      <label for="id_username">Username:</label>
+      <input type="text" maxlength="30" name="username" value="{{ form.data.username }}" id="id_username" class="text">
+      {% for error in form.errors.username %}<span class="val_message">{{ error }}</span>{% endfor %}
+
+      <label for="id_password">Password:</label>
+      <input type="password" id="id_password" name="password" value="{{ form.data.password }}" class="text">
+      {% for error in form.errors.password %}<span class="val_message">{{ error }}</span>{% endfor %}
+
+      <a href="#" class="btn red_grad shadow_big" role="button"><strong>Log in</strong></a>
     </form>
   </div>
 {% endblock content %}

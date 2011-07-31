@@ -4,3 +4,4 @@ env
 *.pyc
 local_settings.py
 static/coffee/
+./*.json

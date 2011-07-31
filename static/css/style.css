@@ -17,7 +17,8 @@ header .inner,
     margin:0 auto;
 }
 header .inner { position:relative; height:40px; }
-header .logo {
+header a {text-decoration:none;}
+header a .logo {
     color:#fff;
     font: bold 22px/40px "Museo Sans 700", museo-sans-n7, museo-sans, sans-serif;
     text-shadow: #000 0px -1px 0px;
@@ -263,7 +264,8 @@ position: absolute !important;
 top: 160px;
 width: 100%;}
 
-.timeline-event-label {}
+.timeline-event-label {width:200px; font: normal 13px/16px "Museo Sans 500", museo-sans-n5, museo-sans, sans-serif; color:#444; margin-left:20px; padding:10px;}
+
 .timeline-date-label, .timeline-band-layer-inner {font: normal 20px/20px "Museo Sans 500", museo-sans-n5, museo-sans, sans-serif; color:#369 !important;}
 .timeline-date-label {font-size:13px; line-height:20px; height:30px !important;}
 .timeline-band-1 .timeline-date-label {font-size:20px; line-height:20px;}
@@ -293,10 +295,10 @@ box-shadow: rgba(0, 0, 0, 0.5)  2px 2px 7px 1px  ;}
 
 .children_panel .child.active {border:2px solid #339900; }
 
-.children_panel .child a.child_on {min-width:120px; border-radius:5px; font: bold 30px/32px "Museo Sans 700", museo-sans-n7, museo-sans, sans-serif; color:#c66; text-decoration:none; padding:10px 30px 20px 10px; display:block;}
+.children_panel .child a.child_on {min-width:140px; border-radius:5px; font: bold 30px/32px "Museo Sans 700", museo-sans-n7, museo-sans, sans-serif; color:#c66; text-decoration:none; padding:10px 30px 20px 10px; display:block;}
 .children_panel .child a.child_on:hover {background:#F9EFCA;}
 .children_panel .child.active a.child_on:hover {background:inherit; cursor:default;}
-.children_panel .child span {display:block; position:absolute; font:normal 12px/14px sans-serif; text-transform:uppercase; color:#888; bottom:5px; left:10px;}
+.children_panel .child span {display:block; position:absolute; font:normal 10px/14px sans-serif; text-transform:uppercase; color:#888; bottom:5px; left:10px;}
 
 .children_panel .child a.edit {display:block; height:32px; width:32px;  float:left; margin:5px 0; border-radius:32px; text-indent:-999em; position:absolute; top:10px; right:-16px; 
  border:  solid 1px rgba(51, 153, 0, 0.7);
@@ -327,5 +329,5 @@ background: url(../img/edit.png) 50% 50% no-repeat, linear-gradient(top, #339900
 .home_title h2 {font: normal 24px/30px Georgia, sans-serif; margin:0;}
 
 .action_btns {position:absolute; z-index:999; margin:0 auto; width:100%; text-align:center; top:500px;}
-.action_btns .sep {padding: 0 20px; font: bold 16px/48px "Museo Sans 500", museo-sans-n5, museo-sans, sans-serif;}
-.action_btns a.btn {height: 48px; border-radius:44px; font: bold 30px/48px "Museo Sans 900", museo-sans-n9, museo-sans, sans-serif; padding: 0 30px; border:none;}
+.action_btns .sep {padding: 0 20px; font: bold 16px/60px "Museo Sans 500", museo-sans-n5, museo-sans, sans-serif; color:#fff;}
+.action_btns a.btn {height: 60px; border-radius:60px; font: bold 30px/60px "Museo Sans 900", museo-sans-n9, museo-sans, sans-serif; padding: 0 30px; border:none;}
