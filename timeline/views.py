@@ -26,7 +26,7 @@ class YouTubeEvent(object):
 
 def start(request):
     if request.user.is_authenticated():
-        return HttpResponseRedirect(reverse('timeline.views.logged_in'))
+        return HttpResponseRedirect(reverse('timeline.views.logged_in', args=[request.user]))
     else:
         events = json.dumps([YouTubeEvent(video) for video in youtube.list_videos('vorushin')], cls=ObjectEncoder)
         return render(request, 'timeline/start.html', { 'events' : events, 'body_class' : 'home' });
@@ -34,7 +34,7 @@ def start(request):
 def logged_in(request, username):
     children = Child.objects.filter(user__username__exact=username)
     if not children:
-        return HttpResponseRedirect(reverse('timeline.views.no_children'))
+        return render(request, 'timeline/no_profiles.html')
         
     return HttpResponseRedirect(reverse('timeline.views.timeline', args=[username, children[0].slug]))
 
