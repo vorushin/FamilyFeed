@@ -13,22 +13,29 @@ from sources import youtube, facebook
 from timeline.utils import age
 from utils.json import ObjectEncoder
 
+def event_date(date_time):
+    return datetime.date(year=date_time.year, month=date_time.month, day=date_time.day).isoformat()
+
 class YouTubeEvent(object):
     
     def __init__(self, video):
         self.id = video.url
-        self.start = datetime.date(year=video.published.year, month=video.published.month, day=video.published.day).isoformat()
+        self.start = event_date(video.published)
         self.title = video.title
         self.caption = video.title
         self.icon = video.thumbnails[1].url
         self.url = video.url
         self.classname = 'video-label'
+        # self.classname = 'picture-label'
 
 class FacebookEvent(object):
 
     def __init__(self, post):
-        self.start = post['created_time']
+        self.start = event_date(datetime.datetime.strptime(post['created_time'], '%Y-%m-%dT%H:%M:%S+0000'))
         self.title = post['message']
+        if post.get('picture'):
+            self.icon = post['picture']
+            # self.classname = 'picture-label'
 
 
 def start(request):
@@ -52,13 +59,13 @@ def timeline(request, username, child_slug):
     for facebook_source in child.facebook_sources:
         # TODO keywords
         facebook_events.extend(facebook.list_posts(facebook_source.access_token, first_5=True))
-        print "+++++ ", facebook_source.access_token
+        # print "+++++ ", facebook_source.access_token
     
     print "***** ", facebook_events
     
-    # TODO keywords
     events = []
     events.extend([FacebookEvent(post) for post in facebook_events])
+    # TODO keywords
     events.extend([YouTubeEvent(video) for video in youtube.list_videos('vorushin')])
     events_json = json.dumps(events, cls=ObjectEncoder)
     children_data = [dict(name=child.name, slug=child.slug, age=age(child.birthdate)) for child in children]
