@@ -1,14 +1,31 @@
 {% extends 'base.html' %}
 
 {% block extrahead %}
-    <script src="http://static.simile.mit.edu/timeline/api-2.3.0/timeline-api.js?bundle=true" type="text/javascript"></script>
+    <link rel="stylesheet" href="{{ STATIC_URL }}fancybox/jquery.fancybox-1.3.4.css">
+
+    <!-- <script src="http://static.simile.mit.edu/timeline/api-2.3.0/timeline-api.js?bundle=true" type="text/javascript"></script> -->
+    <script src="{{ STATIC_URL }}timeline/timeline-api.js" type="text/javascript"></script>
+
     <script src="{{ STATIC_URL }}js/timelineview.js" /></script>
+    <script src="{{ STATIC_URL }}fancybox/jquery.fancybox-1.3.4.pack.js" /></script>
+    <script src="{{ STATIC_URL }}fancybox/jquery.easing-1.3.pack.js" /></script>
 
     <script>
-        $(document).ready(function() { createTimeline({{ events|safe }}); })
+        $(document).ready(function() { createTimeline({{ events|safe }}, Timeline.DateTime.WEEK, Timeline.DateTime.MONTH); })
     </script>
 {% endblock %}
 
 {% block timeline %}
     <div id="my-timeline" style="height: 500px; border: 1px solid #aaa"></div>
 {% endblock timeline %}
+
+{% block content %}
+<div class="children_panel">
+<div class="child active grey_grad"><a href="#" class="child_on">Marta <span>10 monthes old</span></a><a href="#" class="edit">Edit Marta's profile</a></div>
+
+<div class="child shadow_big grey_grad"><a href="#" class="child_on">Eva <span>3 years old</span></a><a href="#" class="edit">Edit Eva's profile</a></div>
+<a href="#" class="add green_grad shadow_big" title="Add child profile">+</a> 
+
+</div>
+
+{% endblock content %}
