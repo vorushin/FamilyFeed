@@ -1,21 +1,37 @@
 function createTimeline(events, eventInterval, scaleInterval) {
     Timeline.CompactEventPainter.prototype._showBubble = function(x, y, events) {
-        var videoUrl = events[0].getProperty("videoUrl");
-        if (videoUrl == undefined) {
-            return;
+        var event = events[0];
+        var type = event.getProperty('type');
+        switch (type) {
+            case 'youtube':
+            var videoUrl = event.getProperty("videoUrl");
+            $.fancybox({
+                'titleShow'        : false,
+                'transitionIn'     : 'elastic',
+                'transitionOut'    : 'elastic',
+                'href'             : videoUrl + "&fs=1&autoplay=1",
+                'type'             : 'swf',
+                'swf'              : { 'wmode' : 'transparent' }
+            });
+            break;
+
+            case 'facebook':
+            var message = event.getProperty("message");
+            $.fancybox({
+                'titleShow'        : false,
+                'transitionIn'     : 'elastic',
+                'transitionOut'    : 'elastic',
+                'content'          : message
+            });
+            break;
+            
         }
-        $.fancybox({
-            'titleShow'        : false,
-            'transitionIn'     : 'elastic',
-            'transitionOut'    : 'elastic',
-            'href'             : videoUrl + "&fs=1&autoplay=1",
-            'type'             : 'swf',
-            'swf'              : { 'wmode' : 'transparent' }
-        });
+        // if (type == undefined) {
+        // } else {
+        // }
     };
-    // var now = new Date();
-    // var timelineDate = Date(now.getTime() - 3 * 30 * 24 * 60 * 60 * 1000);
-    // console.log("****** " + timelineDate);
+    var now = new Date();
+    var fewMonthsAgo = new Date(now.getTime() - 2 * 30 * 24 * 60 * 60 * 1000);
     var eventSource = new Timeline.DefaultEventSource();
     var bandInfos = [
         Timeline.createBandInfo({
@@ -25,6 +41,7 @@ function createTimeline(events, eventInterval, scaleInterval) {
             intervalPixels: 100,
             showEventText: false,
             eventPainter:   Timeline.CompactEventPainter,
+            date: fewMonthsAgo,
             eventPainterParams: {
                 iconLabelGap:     5,
                 labelRightMargin: 20,
@@ -44,6 +61,7 @@ function createTimeline(events, eventInterval, scaleInterval) {
             width:          "10%",
             intervalUnit:   scaleInterval,
             intervalPixels: 200,
+            date: fewMonthsAgo,
             layout: 'overview'
         })
     ];

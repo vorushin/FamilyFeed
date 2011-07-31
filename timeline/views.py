@@ -28,6 +28,7 @@ def event_date(date_time):
 class YouTubeEvent(object):
 
     def __init__(self, video):
+        self.type = 'youtube'
         self.id = video.url
         self.start = event_date(video.published)
         self.title = video.title
@@ -41,11 +42,14 @@ class YouTubeEvent(object):
 class FacebookEvent(object):
 
     def __init__(self, post):
+        self.type = 'facebook'
         self.start = event_date(datetime.datetime.strptime(post['created_time'], '%Y-%m-%dT%H:%M:%S+0000'))
         self.title = shorten(post['message'])
+        self.message = post['message']
         if post.get('picture'):
             self.icon = post['picture']
-            # self.classname = 'picture-label'
+        self.classname = 'facebook-label'
+        self.iconClassName = 'facebook-icon'
 
 
 def start(request):
