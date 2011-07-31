@@ -29,7 +29,6 @@ function createTimeline(events, eventInterval, scaleInterval) {
                 stackConcurrentPreciseInstantEvents: {
                     limit: 5,
                     moreMessageTemplate:    "%0 More Events",
-                    icon:                   "no-image-80.png", // default icon in stacks
                     iconWidth:              120,
                     iconHeight:             90
                 }
