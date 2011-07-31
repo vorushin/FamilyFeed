@@ -240,7 +240,7 @@ background:url(../img/yt.png) no-repeat 10px 15px, linear-gradient(top, rgba(255
 
 .source .added_source {position:relative; height:40px; width:40px;float:left; margin-right:10px; }
 
-.source .added_source .delete  {display:block; position:absolute; top:-4px; right:-4px; height:12px; width:12px; border-radius:12px; color:#fff; text-align:center; font: normal 12px/12px Helvetica, Arial, sans-serif; text-decoration:none;}
+.source .added_source .delete  {display:block; position:absolute; top:-4px; right:-4px; height:12px; width:12px; border-radius:12px; color:#fff; text-align:center; font: normal 12px/12px Helvetica, Arial, sans-serif; text-decoration:none; z-index:3;}
 .source .add {display:block; height:32px; width:32px;  float:left; margin:5px 0; border-radius:32px;
 position:absolute; top:15px; right:-16px; color:#fff; font: bold 26px/32px Helvetica, Arial, sans-serif; text-align:center; text-decoration:none; z-index:2; }
 
