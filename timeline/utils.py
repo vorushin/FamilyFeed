@@ -11,10 +11,13 @@ def age(birthdate):
         months = 12 - birthdate.month + now.month
     else:
         months = now.month - birthdate.month
+
     if years >= 5:
         return '%s years' % years
+
     if now.day < birthdate.day:
         months -= 1
+
     if months == 0:
         if now.day < birthdate.day:
             last_day_of_month = calendar.monthrange(birthdate.year, birthdate.month)[1]
@@ -22,6 +25,7 @@ def age(birthdate):
         else:
             days = now.day - birthdate.day
         return '%s days' % days
+
     if years < 1:
         return '%s months' % months
     return '%s years %s months' % (years, months)

@@ -3,6 +3,8 @@ from __future__ import absolute_import
 import json
 import datetime
 
+from django.core.urlresolvers import reverse
+from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render
 
 from sources import youtube
