@@ -71,7 +71,6 @@ class ChildForm(forms.ModelForm):
     def save(self, commit=True):
         child = super(ChildForm, self).save(commit=False)
         child.user = self.user
-        child.slug = make_uri_title(child.name)
         if commit:
             child.save()
         return child
