@@ -15,7 +15,7 @@ function createTimeline(events, eventInterval, scaleInterval) {
                 'titleShow'        : false,
                 'transitionIn'     : 'elastic',
                 'transitionOut'    : 'elastic',
-                'content'          : "Hello, World!"
+                'content'          : "This is a long text for Igor. Please style it nice. Thanks! :)"
             });
         }
     };
