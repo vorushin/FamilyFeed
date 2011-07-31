@@ -10,10 +10,13 @@ urlpatterns = patterns('profiles.views',
     url(r'^feeds/facebook$', 'facebook_feed'),
     url(r'^facebook/done/$', 'facebook_login_done'),
 
-    url(r'^^(?P<username>[\w.@+-]+)/(?P<child_slug>[\w.@+-]+)/add_fb/$',
+    url(r'^(?P<username>[\w.@+-]+)/(?P<child_slug>[\w.@+-]+)/add_fb/$',
         'add_facebook_profile'),
-    url(r'^^(?P<username>[\w.@+-]+)/(?P<child_slug>[\w.@+-]+)/add_fb_done/$',
+    url(r'^(?P<username>[\w.@+-]+)/(?P<child_slug>[\w.@+-]+)/add_fb_done/$',
         'add_facebook_profile_done'),
+
+    url(r'^(?P<username>[\w.@+-]+)/(?P<child_slug>[\w.@+-]+)/fb_data_ajax/$',
+        'get_facebook_data_ajax'),
 )
 
 urlpatterns += patterns('',

@@ -1,0 +1,8 @@
+<h3>Preview feed:</h3>
+<p class="suggest">You can remove some of the results, unless you want to add them to the feed</p>
+{% for post in data %}
+    <div class="post tweet"> <img src="{{ post.picture }}" alt="Roman Vorushin"  class="pic" />
+    <div class="post_info"><span class="post_date">{{ post.created_time }}</span> — <span class="post_age"><em>Martha</em> was 1 year 3 month old</span></div>
+    <div class="tweet_text">{{ post.message }}</div>
+    <a href="#" class="post_delete red_grad shadow_small">×</a> </div>
+{% endfor %}
