@@ -1,4 +1,4 @@
-function createTimeline(events) {
+function createTimeline(events, eventInterval, scaleInterval) {
     Timeline.CompactEventPainter.prototype._showBubble = function(x, y, events) {
         var url = events[0].getProperty("url");
         $.fancybox({
@@ -15,7 +15,7 @@ function createTimeline(events) {
         Timeline.createBandInfo({
             eventSource:    eventSource,
             width:          "90%",
-            intervalUnit:   Timeline.DateTime.WEEK,
+            intervalUnit:   eventInterval,
             intervalPixels: 100,
             showEventText: false,
             eventPainter:   Timeline.CompactEventPainter,
@@ -37,7 +37,7 @@ function createTimeline(events) {
         }),
         Timeline.createBandInfo({
             width:          "10%",
-            intervalUnit:   Timeline.DateTime.MONTH,
+            intervalUnit:   scaleInterval,
             intervalPixels: 200,
             layout: 'overview'
         })

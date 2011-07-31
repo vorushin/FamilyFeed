@@ -11,7 +11,7 @@
     <script src="{{ STATIC_URL }}fancybox/jquery.easing-1.3.pack.js" /></script>
 
     <script>
-        $(document).ready(function() { createTimeline({{ events|safe }}); })
+        $(document).ready(function() { createTimeline({{ events|safe }}, Timeline.DateTime.WEEK, Timeline.DateTime.MONTH); })
     </script>
 {% endblock %}
 

@@ -21,11 +21,12 @@ def start(request):
     if request.user.is_authenticated():
         return HttpResponseRedirect(reverse('timeline'))
     else:
-        return render(request, 'timeline/start.html')
+        username = 'vorushin'
+        events = json.dumps([YouTubeEvent(video) for video in youtube.list_videos(username)], cls=ObjectEncoder)
+        return render(request, 'timeline/start.html', { 'events' : events });
 
 def timeline(request):
     username = 'vorushin'
-    # events = json.dumps([YouTubeEvent(video).__dict__ for video in youtube.list_videos(username)])
     events = json.dumps([YouTubeEvent(video) for video in youtube.list_videos(username)], cls=ObjectEncoder)
     return render(request, "timeline/timeline.html", { 'events' : events })
 
