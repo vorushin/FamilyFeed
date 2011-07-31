@@ -3,7 +3,7 @@
 /*------------------- Horizontal / Vertical lines ----------------*/
 
 /* style for ethers */
-.timeline-ether-lines{border-color:#666; border-style:dotted; position:absolute;}
+.timeline-ether-lines{border-color:#6699ff; border-style:dotted; position:absolute; opacity:0.3 !important;}
 .timeline-horizontal .timeline-ether-lines{border-width:0 0 0 1px; height:100%; top: 0; width: 1px;}
 .timeline-vertical .timeline-ether-lines{border-width:1px 0 0; height:1px; left: 0; width: 100%;}
 
@@ -15,7 +15,7 @@
 }
 
 .timeline-vertical .timeline-ether-weekends{left:0;width:100%;}
-.timeline-horizontal .timeline-ether-weekends{top:0; height:100%;}
+.timeline-horizontal .timeline-ether-weekends{top:0; height:100%; border-right: dotted 1px #6699ff; width:15px !important;}
 
 
 /*-------------------------- HIGHLIGHT DECORATORS -------------------*/
@@ -67,7 +67,7 @@
 /*-------------------------------- DATE LABELS --------------------------------*/
 .timeline-date-label {
   position: absolute;
-  border: dotted #aaa;
+  border: none;
   color: #aaa;
   width: 5em;
   height: 30px;}
