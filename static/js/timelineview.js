@@ -18,15 +18,9 @@ function createTimeline(events, eventInterval, scaleInterval) {
             case 'facebook':
             var url = event.getProperty("url");
             if (url != undefined) {
-                $.fancybox({
-                    'titleShow'        : false,
-                    'transitionIn'     : 'elastic',
-                    'transitionOut'    : 'elastic',
-                    'type'             : 'iframe',
-                    'href'             : url
-                    // 'href'             : "http://itc.ua"
-                });
-                
+                window.open(url, 'Facebook',
+                            'height=' + screen.height + ',width=' + screen.width +
+                            ',toolbar=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no');
             } else {
                 var text = event.getProperty("text");
                 $.fancybox({
