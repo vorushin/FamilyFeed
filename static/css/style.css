@@ -17,7 +17,8 @@ header .inner,
     margin:0 auto;
 }
 header .inner { position:relative; height:40px; }
-header .logo {
+header a {text-decoration:none;}
+header a .logo {
     color:#fff;
     font: bold 22px/40px "Museo Sans 700", museo-sans-n7, museo-sans, sans-serif;
     text-shadow: #000 0px -1px 0px;
@@ -263,7 +264,8 @@ position: absolute !important;
 top: 160px;
 width: 100%;}
 
-.timeline-event-label {}
+.timeline-event-label {width:200px; font: normal 13px/16px "Museo Sans 500", museo-sans-n5, museo-sans, sans-serif; color:#444; margin-left:20px; padding:10px;}
+
 .timeline-date-label, .timeline-band-layer-inner {font: normal 20px/20px "Museo Sans 500", museo-sans-n5, museo-sans, sans-serif; color:#369 !important;}
 .timeline-date-label {font-size:13px; line-height:20px; height:30px !important;}
 .timeline-band-1 .timeline-date-label {font-size:20px; line-height:20px;}
