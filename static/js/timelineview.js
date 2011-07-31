@@ -1,6 +1,13 @@
 function createTimeline(events) {
     Timeline.CompactEventPainter.prototype._showBubble = function(x, y, evt) {
-        // do not show bubble
+        $.fancybox({
+            'titleShow'        : false,
+            'transitionIn'     : 'elastic',
+            'transitionOut'    : 'elastic',
+            'href'             : 'http://www.youtube.com/v/u1zgFlCw8Aw?fs=1',
+            'type'             : 'swf',
+            'swf'              : {} //{ 'wmode' : 'transparent' }
+        });
     };
     var eventSource = new Timeline.DefaultEventSource();
     var bandInfos = [
@@ -53,5 +60,11 @@ function createTimeline(events) {
     };
     eventSource.loadJSON(json, document.location.href);
     $('.timeline-event-icon').addClass('video-event');
-    // $('.timeline-event-icon img').addClass('video-event');
+    // TODO lookup titles using JSON events list by thumbnail url...
+    // $('.timeline-event-icon').each(function() {
+    //     var title = $(this).attr("title");
+    //     console.log("**** " + title);
+    //     $(this).children().attr("title", "ABC");
+    //     // $(this).children().attr("title", title);
+    // });
 }
