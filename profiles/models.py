@@ -8,6 +8,7 @@ class Child(models.Model):
     slug = models.SlugField()
     birthdate = models.DateField()
 
+    @property
     def facebook_sources(self):
         return FacebookSource.objects.filter(child=self)
 
