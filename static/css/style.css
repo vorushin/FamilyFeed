@@ -90,10 +90,13 @@ a.btn {
     color:#fff;
     border-radius: 44px;
     text-decoration:none;
-    text-shadow: rgba(153, 51, 51, 1) 0px -1px 0px;
 }
 
-.red_grad {background:#c66;
+.source_form a.btn {margin-right:10px;}
+
+.red_grad {
+text-shadow: rgba(153, 51, 51, 1) 0px -1px 0px;
+background:#c66;
 background: -moz-linear-gradient(top, #cc6666 0%, #993333 100%);
 background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#cc6666), color-stop(100%,#993333));
 background: -webkit-linear-gradient(top, #cc6666 0%,#993333 100%);
@@ -109,8 +112,10 @@ background: -o-linear-gradient(top, #993333 0%,#cc6666 100%);
 background: linear-gradient(top, #993333 0%,#cc6666 100%);
 }
 
-.green_grad { border:  solid 1px rgba(51, 153, 0, 0.7);
-    background:#99cc33;
+.green_grad { 
+text-shadow: #339900 0px -1px 0px;    
+border:  solid -1px #339900;
+background:#99cc33;
 background: -moz-linear-gradient(top, #99cc33 0%, #339900 100%);
 background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#99cc33), color-stop(100%,#339900));
 background: -webkit-linear-gradient(top, #99cc33 0%,#339900 100%);
@@ -126,7 +131,7 @@ background: -o-linear-gradient(top, #339900 0%,#99cc33 100%);
 background: linear-gradient(top, #339900 0%,#99cc33 100%);
 }
 
-a.btn_cancel {display: inline-block; height:14px; margin: 15px 0 15px 20px; font: normal 13px/14px Helvetica, Arial, sans-serif; color: #666; border-bottom: dotted 1px #666;  text-decoration:none;}
+a.btn_cancel {display: inline-block; height:14px; margin: 15px 0 15px 0; font: normal 13px/14px Helvetica, Arial, sans-serif; color: #666; border-bottom: dotted 1px #666;  text-decoration:none;}
 a.btn_cancel:before { content: "× "; border-bottom:none; }
 span.val_message {
     font: italic 13px/16px serif;
@@ -156,6 +161,7 @@ a.icon_source {
     float:left;
     margin: 0 30px 0 0;
 }
+.addsource .source_form label ul li {list-style:none; display:block; height:20px; padding-left:23px; background: url(../img/fb_min.png) 0 2px no-repeat;}
 .addsource .source_preview { margin: 0 0 0 470px; }
 .post {
     margin:0 0 20px;
