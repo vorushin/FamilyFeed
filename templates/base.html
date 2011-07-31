@@ -39,6 +39,9 @@
   {% block timeline %}{% endblock %}
 
   <div id="main">
+    {% for message in messages %}
+        <p class="form_message shadow_big"><strong>{{ message }}</strong></p>
+    {% endfor %}
   {% block content %}{% endblock %}
   </div>
 
