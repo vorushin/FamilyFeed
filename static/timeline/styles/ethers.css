@@ -84,7 +84,14 @@
 
 
 /*------------------------------- Ether.highlight -------------------------*/
-.timeline-ether-highlight{position:absolute; background-color:#fff;}
+.timeline-ether-highlight{position:absolute; 
+background: rgb(255,255,255);
+background: -moz-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(215,231,242,1) 52%, rgba(234,244,247,1) 100%);
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,1)), color-stop(52%,rgba(215,231,242,1)), color-stop(100%,rgba(234,244,247,1)));
+background: -webkit-linear-gradient(top, rgba(255,255,255,1) 0%,rgba(215,231,242,1) 52%,rgba(234,244,247,1) 100%);
+background: -o-linear-gradient(top, rgba(255,255,255,1) 0%,rgba(215,231,242,1) 52%,rgba(234,244,247,1) 100%);
+background: linear-gradient(top, rgba(255,255,255,1) 0%,rgba(215,231,242,1) 52%,rgba(234,244,247,1) 100%);
+}
 .timeline-horizontal .timeline-ether-highlight{height:50px !important;}
 .timeline-vertical .timeline-ether-highlight{left:2px;}
 
@@ -114,6 +121,12 @@
 .timeline-ether-bg{width:100%; height:100%;}
 .timeline-band-0 .timeline-ether-bg { 
 background: url(../../img/clouds.jpg) repeat-x;}
-.timeline-band-1 .timeline-ether-bg{background-color:#ADCBE7; }
+.timeline-band-1 .timeline-ether-bg{
+background: rgb(144,189,229);
+background: -moz-linear-gradient(top, rgba(144,189,229,1) 0%, rgba(188,210,229,1) 48%, rgba(173,203,231,1) 100%);
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(144,189,229,1)), color-stop(48%,rgba(188,210,229,1)), color-stop(100%,rgba(173,203,231,1)));
+background: -webkit-linear-gradient(top, rgba(144,189,229,1) 0%,rgba(188,210,229,1) 48%,rgba(173,203,231,1) 100%);
+background: -o-linear-gradient(top, rgba(144,189,229,1) 0%,rgba(188,210,229,1) 48%,rgba(173,203,231,1) 100%);
+background: linear-gradient(top, rgba(144,189,229,1) 0%,rgba(188,210,229,1) 48%,rgba(173,203,231,1) 100%);}
 .timeline-band-2 .timeline-ether-bg{background-color:#ccc}
 .timeline-band-3 .timeline-ether-bg{background-color:#aaa}

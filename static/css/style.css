@@ -242,8 +242,9 @@ background:url(../img/yt.png) no-repeat 10px 15px, linear-gradient(top, rgba(255
 
 .source .added_source .delete  {display:block; position:absolute; top:-4px; right:-4px; height:12px; width:12px; border-radius:12px; color:#fff; text-align:center; font: normal 12px/12px Helvetica, Arial, sans-serif; text-decoration:none;}
 .source .add {display:block; height:32px; width:32px;  float:left; margin:5px 0; border-radius:32px;
-position:absolute; top:15px; right:-16px; color:#fff; font: bold 26px/32px Helvetica, Arial, sans-serif; text-align:center; text-decoration:none; }
+position:absolute; top:15px; right:-16px; color:#fff; font: bold 26px/32px Helvetica, Arial, sans-serif; text-align:center; text-decoration:none; z-index:2; }
 
+.source .view {display:block; position:absolute; width:100%; height:100%; z-index:1; top:0; left:0;}
 
 
 
@@ -258,7 +259,7 @@ width: 100%;}
 .timeline-date-label, .timeline-band-layer-inner {font: normal 20px/20px "Museo Sans 500", museo-sans-n5, museo-sans, sans-serif; color:#369 !important;}
 .timeline-date-label {font-size:13px; line-height:20px; height:30px !important;}
 .timeline-band-1 .timeline-date-label {font-size:20px; line-height:20px;}
-.timeline-date-label, .timeline-date-label-em {height: 20px !important; color:#222;}
+.timeline-date-label-em {height: 30px !important; color:#444  !important; font: bold 20px/30px "Museo Sans 900", museo-sans-n9, museo-sans, sans-serif;}
 
 
 /* Pics, Videos, Stacks */
