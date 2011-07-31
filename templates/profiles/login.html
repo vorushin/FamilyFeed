@@ -27,7 +27,7 @@ $(document).ready(function() {
       <input type="password" id="id_password" name="password" value="{{ form.data.password }}" class="text">
       {% for error in form.errors.password %}<span class="val_message">{{ error }}</span>{% endfor %}
 
-      <a  href="#" class="btn red_grad shadow_big" role="button"><strong>Log in</strong></a>
+      <a href="#" class="btn red_grad shadow_big" role="button"><strong>Log in</strong></a>
     </form>
   </div>
 {% endblock content %}
