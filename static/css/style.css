@@ -335,9 +335,9 @@ background: url(../img/edit.png) 50% 50% no-repeat, linear-gradient(top, #339900
 
 
 .timeline-event-label  {
-    padding:10px 10px 10px 24px;
+    padding:10px;
     background: rgba(255,255,255,0.7);
     width:auto !important;
 }
 
-.facebook-label {background: rgba(255,255,255,0.7);}
+.facebook-label {background: rgba(255,255,255,0.7) url(../img/fb_min.png) 10px 50% no-repeat; padding-left:30px;}

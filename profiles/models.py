@@ -1,7 +1,15 @@
 from django.contrib.auth.models import User
 from django.db import models
 
-from utils import make_uri_title
+from utils import comma_split, make_uri_title
+
+
+def youtube_picture(username):
+    from gdata.youtube.service import YouTubeService
+    yt_service = YouTubeService()
+    entry = yt_service.GetYouTubeUserEntry(
+        'https://gdata.youtube.com/feeds/api/users/vorushin')
+    return entry.thumbnail.url
 
 
 class Child(models.Model):
@@ -24,6 +32,14 @@ class Child(models.Model):
     @property
     def youtube_source(self):
         return YoutubeSource.objects.get_or_create(child=self)[0]
+
+    @property
+    def youtube_accounts(self):
+        results = []
+        for username in comma_split(self.youtube_source.usernames):
+            results.append({'username': username,
+                            'picture': youtube_picture(username)})
+        return results
 
     @property
     def twitter_source(self):

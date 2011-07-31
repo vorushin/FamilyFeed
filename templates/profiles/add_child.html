@@ -6,12 +6,11 @@
 
 {% block content %}
   <div class="register step2 cf">
-    <p class="form_message"><strong>Welcome on board, %username!</strong></p>
     <h1>Add some info about your child</h1>
     <p>Some instructions goes here. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum et vestibulum augue.</p>
     <form method="POST" action="." сlass="cf">
       {% csrf_token %}
-      <label for="babyname">Name of your child</label>
+      <label for="babyname">Your child's name</label>
       <input type="text" name="name" value="{{ form.data.name }}" class="text" id="babyname" tabindex="1" required>
       {% for error in form.errors.name %}<span class="val_message">{{ error }}</span>{% endfor %}
 

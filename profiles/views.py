@@ -35,6 +35,7 @@ def registration(request):
             user = authenticate(username=user.username,
                                 password=form.cleaned_data['password'])
             auth_login(request, user)
+            messages.success(request, u'Welcome on board, %s' % user.username)
             return HttpResponseRedirect(reverse('profiles.views.add_child'))
     else:
         form = RegistrationForm()
