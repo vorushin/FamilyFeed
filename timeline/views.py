@@ -35,6 +35,7 @@ class YouTubeEvent(object):
         self.icon = video.thumbnails[1].url
         self.url = video.url
         self.classname = 'video-label'
+        self.iconClassName = 'video-event'
         # self.classname = 'picture-label'
 
 class FacebookEvent(object):

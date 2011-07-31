@@ -61,12 +61,4 @@ function createTimeline(events, eventInterval, scaleInterval) {
         'events': events
     };
     eventSource.loadJSON(json, document.location.href);
-    $('.timeline-event-icon').addClass('video-event');
-    // TODO lookup titles using JSON events list by thumbnail url...
-    // $('.timeline-event-icon').each(function() {
-    //     var title = $(this).attr("title");
-    //     console.log("**** " + title);
-    //     $(this).children().attr("title", "ABC");
-    //     // $(this).children().attr("title", title);
-    // });
 }
