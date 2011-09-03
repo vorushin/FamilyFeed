@@ -61,7 +61,7 @@ class FacebookEvent(object):
         self.title = shorten(self.message or self.description)
         if post.get('link'):
             self.url = post['link']
-        
+
         post_picture = post.get('picture')
         if post_picture and post_picture.find('safe_image.php') == -1:
             self.icon = post_picture
@@ -105,7 +105,7 @@ def timeline(request, username, child_slug):
         events_key = '%s_%s' % (facebook_source.uid, make_uri_title(facebook_source.keywords))
         events = cache.get(events_key)
         if not events:
-            events = keywords_present(facebook.list_posts(facebook_source.access_token, first_5=True), comma_split(facebook_source.keywords), facebook.post_text)
+            events = keywords_present(facebook.list_posts(facebook_source.access_token, first_5=False), comma_split(facebook_source.keywords), facebook.post_text)
             cache.set(events_key, events, 24 * 3600)
         facebook_events.extend(events)
 
