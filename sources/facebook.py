@@ -1,4 +1,4 @@
-from urllib2 import urlopen
+from urllib2 import urlopen, HTTPError
 import json
 
 def post_text(item):
@@ -16,6 +16,9 @@ def list_posts(access_token, first_5=False):
                 items.append(item)
         if first_5:
             break
-        resp = json.loads(urlopen(resp['paging']['next']).read())
+        try:
+            resp = json.loads(urlopen(resp['paging']['next']).read())
+        except HTTPError:
+            break
 
     return items
