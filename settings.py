@@ -140,6 +140,7 @@ INSTALLED_APPS = (
     'south',
     'coffeescript',
 
+    'sources',
     'profiles',
     'timeline',
 )

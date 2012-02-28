@@ -17,7 +17,6 @@ from sources import youtube, facebook
 
 from timeline.views import keywords_present, FacebookEvent, YouTubeEvent
 from utils import comma_split
-from utils.json import ObjectEncoder
 from utils.fb import facebook_callback, request_facebook_permissions
 
 
@@ -71,18 +70,6 @@ def edit_child(request, username, child_slug):
     return render(request, 'profiles/edit_child.html', {'child': child})
 
 
-def youtube_feed(request):
-    username = request.GET['username']
-    return HttpResponse(json.dumps(youtube.list_videos(username),
-                                   cls=ObjectEncoder))
-
-
-def facebook_feed(request):
-    token = 'TODO'
-    username = request.GET['username']
-    return HttpResponse(json.dumps(facebook.list_posts(username, token)))
-
-
 @facebook_callback
 def facebook_login_done(request, access_token):
     return HttpResponse(access_token)
@@ -126,20 +113,21 @@ def add_facebook_profile_done(request, access_token, username, child_slug):
 
 def get_facebook_data_ajax(request, username, child_slug):
     child = get_object_or_404(Child, user__username=username, slug=child_slug)
-    keywords = request.GET['keywords']
-    data = []
+    keywords = comma_split(request.GET['keywords'])
+    print keywords
+    facebook_events = []
     for source in child.facebook_sources.all():
-        for item in _facebook_feed_items(source.access_token, keywords):
-            data.append(item)
-
-    facebook_events = [FacebookEvent(item) for item in data]
+        facebook_events += facebook.list_posts(source.access_token)
+    facebook_events = keywords_present(facebook_events,
+                                       keywords,
+                                       facebook.post_text)
+    facebook_events = [FacebookEvent(e) for e in facebook_events]
     return render(request,
                   'profiles/facebook_data.html',
                   {'facebook_events': facebook_events})
 
 
 def get_youtube_data_ajax(request, username, child_slug):
-    child = get_object_or_404(Child, user__username=username, slug=child_slug)
     keywords = comma_split(request.GET['keywords'])
     usernames = comma_split(request.GET['usernames'])
     youtube_events = []
@@ -148,7 +136,7 @@ def get_youtube_data_ajax(request, username, child_slug):
     youtube_events = keywords_present(youtube_events,
                                       keywords,
                                       lambda video: video.title)
-    youtube_events = [YouTubeEvent(video) for video in youtube_events]
+    youtube_events = [YouTubeEvent(e) for e in youtube_events]
     return render(request,
                   'profiles/youtube_data.html',
                   {'youtube_events': youtube_events})

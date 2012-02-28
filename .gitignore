@@ -5,3 +5,4 @@ env
 local_settings.py
 static/coffee/
 ./*.json
+dump.sql
