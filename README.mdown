@@ -1,12 +1,12 @@
 # About FamilyFeed
 
-FamilyFeed is a DjangoDash 2011 project. The project idea belongs to Yana Vorushina, one of our programmer's wife.
+FamilyFeed is a [DjangoDash 2011](http://djangodash.com/) project. The project idea belongs to Yana Vorushina.
 
 You can create account for your kid, and add data sources (currently facebook and youtube).
 We will scan these sources using keywords you provided and show everything we
 found on a timeline.
 
-See live example - [http://familyfeed.vorushin.ru/vorushins/Marta/](http://familyfeed.vorushin.ru/vorushins/Marta/)
+Take a look at this **live example** - [http://familyfeed.vorushin.ru/vorushins/Marta/](http://familyfeed.vorushin.ru/vorushins/Marta/)
 
 # Team
 
@@ -14,4 +14,8 @@ See live example - [http://familyfeed.vorushin.ru/vorushins/Marta/](http://famil
 * [Matvey Maslov](http://twitter.com/matveym), programmer
 * [Roman Vorushin](http://vorushin.ru), programmer
 
-We are working together at [grammarly.com](http://grammarly.com) cozy office.
+We are working together in [Grammarly Inc.](http://grammarly.com).
+
+# Known issues
+
+Timelines aren't shown in Safary.
