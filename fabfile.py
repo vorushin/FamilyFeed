@@ -1,21 +1,18 @@
 from fabric.api import *
 
-
 PROJECT_NAME = 'familyfeed'
 PROJECT_DIR = '/srv/code/' + PROJECT_NAME
 
-
 def run_in_virtualenv(command):
-    run('source env/bin/activate && ' + command)
+    run('source /srv/.virtualenvs/%s/bin/activate && %s' %
+        (PROJECT_NAME, command))
 
 #
 # Different servers
 #
 
-
 def test():
     env.hosts = ['root@hydra.sciworth.com']
-
 
 def production():
     env.hosts = ['root@vorushin.ru']
@@ -24,20 +21,16 @@ def production():
 # Actual commands
 #
 
-
 def deploy():
-    with cd('/home/django/FamilyFeed'):
-        run('sudo -u django git pull')
+    with cd(PROJECT_DIR):
+        run('git pull')
         run_in_virtualenv('pip install -r requirements.txt')
         run_in_virtualenv('./manage.py syncdb')
-        run_in_virtualenv('./manage.py migrate --noinput')
-        run('initctl reload-configuration')
-        run('restart familyfeed')
-
+        run_in_virtualenv('./manage.py migrate')
+        run('restart ' + PROJECT_NAME)
 
 import settings
 db_settings = settings.DATABASES['default']
-
 
 def fetch_db():
     with cd(PROJECT_DIR):
