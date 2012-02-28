@@ -4,14 +4,13 @@ from __future__ import absolute_import
 
 import json
 
-from django.core.cache import cache
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 
 from profiles.models import Child
 from sources import youtube, facebook
-from utils import comma_split, make_uri_title
+from utils import comma_split
 from utils.json import ObjectEncoder
 
 EXPECTED_TITLE_LEN = 30
@@ -92,16 +91,11 @@ def timeline(request, username, child_slug):
 
     facebook_events = []
     for facebook_source in child.facebook_sources.all():
-        #events_key = '%s_%s' % (facebook_source.uid,
-        #                        make_uri_title(facebook_source.keywords))
-        #events = cache.get(events_key)
-        #if not events:
         posts = facebook.list_posts(facebook_source.access_token)
         events = keywords_present(
             posts,
             comma_split(facebook_source.keywords),
             facebook.post_text)
-            #cache.set(events_key, events, 24 * 3600)
         facebook_events.extend(events)
 
     youtube_source = child.youtube_source
@@ -117,7 +111,7 @@ def timeline(request, username, child_slug):
              [YouTubeEvent(video) for video in youtube_events]
     events_json = json.dumps(events, cls=ObjectEncoder)
     return render(request,
-                  "timeline/timeline.html",
+                  'timeline/timeline.html',
                   {'events': events_json,
                    'children': children,
                    'username': username,
