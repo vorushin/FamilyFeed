@@ -16,14 +16,14 @@ def list_posts(access_token):
     latest_created_time = FacebookPost.objects\
         .filter(access_token=access_token)\
         .aggregate(Max('created_time'))['created_time__max']
-    for post in new_posts(access_token, latest_created_time):
+    '''for post in new_posts(access_token, latest_created_time):
         if not FacebookPost.objects.filter(
                 access_token=access_token,
                 created_time=time(post['created_time'])).exists():
             FacebookPost.objects.create(
                 access_token=access_token,
                 created_time=time(post['created_time']),
-                data=post)
+                data=post)'''
     return [p.data for p in FacebookPost.objects \
                                         .filter(access_token=access_token) \
                                         .order_by('-created_time')]
