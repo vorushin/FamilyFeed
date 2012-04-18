@@ -13,6 +13,4 @@ jsonfield==0.7
 
 gdata>=2.0.16
 
-git+git://github.com/facebook/python-sdk.git#facebook_python_sdk
-
 trans==1.3

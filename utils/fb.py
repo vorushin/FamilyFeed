@@ -8,7 +8,6 @@ from urllib import urlopen, urlencode
 from django.conf import settings
 from django.contrib import messages
 from django.http import HttpResponseRedirect, HttpResponseBadRequest
-import facebook
 
 from utils import absolute_uri, json, log_exception
 
@@ -81,14 +80,6 @@ def get_facebook_access_token(request):
                        + urlencode(params)).read()
 
     return parse_qs(response)['access_token'][-1]
-
-
-def put_wall_post(access_token, post):
-    api = facebook.GraphAPI(access_token)
-    try:
-        api.put_wall_post(post.encode('utf-8'))
-    except facebook.GraphAPIError:
-        log_exception('GraphAPIError in put_wall_post()')
 
 
 def facebook_callback(func):
