@@ -1,5 +1,5 @@
 ipdb==0.6.1
-ipython==7.16.3
+ipython==8.10.0
 Fabric==1.2.0
 
 Django==2.2.28
